@@ -41,5 +41,17 @@ button {
   100% { transform: rotate(-3deg); }
 }
 
+.app-info {
+  margin-top: 60px;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.app-info p {
+  margin: 0;
+}
+
+
+
 
 
