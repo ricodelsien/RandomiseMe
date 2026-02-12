@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // randomiser
   window.roll = function() {
     if (projects.length === 0) {
-      alert("Noch keine Projekte vorhanden!");
+      alert("No projects added yet!");
       return;
     }
 
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       button.classList.remove("rolling");
 
       const finalIndex = Math.floor(Math.random() * projects.length);
-      resultDiv.textContent = "Your UFO of the day is: " + projects[finalIndex];
+      resultDiv.textContent = "Oh look, it's: " + projects[finalIndex];
     }, 2000);
   };
 
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
       saveProjects();
       renderProjects();
 
-      alert(`Import finished: ${added} new entries added.`);
+      alert(`Import finished: ${added} new projects added.`);
     };
 
     reader.readAsText(file);
@@ -133,3 +133,4 @@ document.addEventListener("DOMContentLoaded", function () {
   // render init
   renderProjects();
 });
+
