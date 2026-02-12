@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // Projekte aus LocalStorage laden
+  // import projects from txt or csv
   let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
-  // Projekte speichern
+  // save project
   function saveProjects() {
     localStorage.setItem("projects", JSON.stringify(projects));
   }
 
-  // Projekt hinzufügen
+  // add project
   function addProject() {
     const input = document.getElementById("projectInput");
     const name = input.value.trim();
@@ -22,13 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
     input.focus();
   }
 
-  // Projekt löschen
+  // delete project
   window.deleteProject = function(index) {
     projects.splice(index, 1);
     saveProjects();
     renderProjects();
   };
 
+  // delete entire list
 window.clearAll = function() {
   const confirmDelete = confirm("Do you really want to clear the list?");
   if (!confirmDelete) return;
@@ -39,7 +40,7 @@ window.clearAll = function() {
   document.getElementById("result").textContent = "";
 };
 
-  // Projektliste anzeigen
+  // show list
   function renderProjects() {
     const list = document.getElementById("projectList");
     list.innerHTML = "";
@@ -54,7 +55,7 @@ window.clearAll = function() {
     });
   }
 
-  // Zufallsauswahl
+  // randomiser
   window.roll = function() {
     if (projects.length === 0) {
       alert("Noch keine Projekte vorhanden!");
@@ -80,7 +81,7 @@ window.clearAll = function() {
     }, 2000);
   };
 
-  // Datei-Import
+  // import data
   document.getElementById("fileInput").addEventListener("change", function(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -103,15 +104,16 @@ window.clearAll = function() {
     reader.readAsText(file);
   });
 
-  // Enter aktivieren
+  // activate add on enter
   document.getElementById("projectForm").addEventListener("submit", function(event) {
     event.preventDefault();
     addProject();
   });
 
-  // Initial rendern
+  // render init
   renderProjects();
 });
+
 
 
 
