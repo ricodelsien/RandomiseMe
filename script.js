@@ -1,11 +1,15 @@
+// Projekte aus LocalStorage laden
 let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
+// Initial rendern
 renderProjects();
 
+// Projekte speichern
 function saveProjects() {
   localStorage.setItem("projects", JSON.stringify(projects));
 }
 
+// Projekt hinzufügen
 function addProject() {
   const input = document.getElementById("projectInput");
   const name = input.value.trim();
@@ -16,14 +20,18 @@ function addProject() {
   input.value = "";
   saveProjects();
   renderProjects();
+
+  input.focus(); // direkt weiter tippen
 }
 
+// Projekt löschen
 function deleteProject(index) {
   projects.splice(index, 1);
   saveProjects();
   renderProjects();
 }
 
+// Projektliste anzeigen
 function renderProjects() {
   const list = document.getElementById("projectList");
   list.innerHTML = "";
@@ -38,6 +46,7 @@ function renderProjects() {
   });
 }
 
+// Zufallsauswahl mit Animation
 function roll() {
   if (projects.length === 0) {
     alert("Noch keine Projekte vorhanden!");
@@ -49,11 +58,9 @@ function roll() {
 
   button.classList.add("rolling");
 
-  let counter = 0;
   const interval = setInterval(() => {
     const randomIndex = Math.floor(Math.random() * projects.length);
     resultDiv.textContent = projects[randomIndex];
-    counter++;
   }, 80);
 
   setTimeout(() => {
@@ -65,6 +72,7 @@ function roll() {
   }, 2000);
 }
 
+// Datei-Import (TXT oder CSV, eine Zeile = ein Projekt)
 document.getElementById("fileInput").addEventListener("change", function(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -72,15 +80,23 @@ document.getElementById("fileInput").addEventListener("change", function(event) 
   const reader = new FileReader();
   reader.onload = function(e) {
     const lines = e.target.result.split(/\r?\n/);
+
     lines.forEach(line => {
-      if (line.trim() !== "") {
-        projects.push(line.trim());
+      const trimmed = line.trim();
+      if (trimmed !== "" && !projects.includes(trimmed)) {
+        projects.push(trimmed);
       }
     });
+
     saveProjects();
     renderProjects();
   };
+
   reader.readAsText(file);
 });
 
-
+// ENTER-Taste aktivieren (Formular-Submit abfangen)
+document.getElementById("projectForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  addProject();
+});
