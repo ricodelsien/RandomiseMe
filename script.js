@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
 window.clearAll = function() {
-  const confirmDelete = confirm("Wirklich alle UFOs löschen? Das kann nicht rückgängig gemacht werden.");
+  const confirmDelete = confirm("Do you really want to clear the list?");
   if (!confirmDelete) return;
 
   projects = [];
@@ -112,6 +112,7 @@ window.clearAll = function() {
   // Initial rendern
   renderProjects();
 });
+
 
 
 
