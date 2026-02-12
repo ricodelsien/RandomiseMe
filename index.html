@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>RandomizeMe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Projektsalat-Zufallsgenerator</h1>
+
+  <div class="input-section">
+    <input type="text" id="projectInput" placeholder="Projektname eingeben">
+    <button onclick="addProject()">Hinzufügen</button>
+  </div>
+
+  <div class="import-section">
+    <input type="file" id="fileInput" accept=".txt,.csv">
+  </div>
+
+  <h2>Projekte:</h2>
+  <ul id="projectList"></ul>
+
+  <button id="randomBtn" onclick="roll()">🎲 Zufall wählen</button>
+
+  <div id="result"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
