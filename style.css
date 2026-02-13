@@ -22,6 +22,18 @@ html, body {
   margin-bottom: 30px;
 }
 
+/* ========== FLAVOUR ========== */
+
+.flavour-text {
+  margin-bottom: 25px;
+  opacity: 0.75;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ========== INPUT FIELD ========== */
 
 input[type="text"] {
@@ -222,6 +234,7 @@ li {
 .app-info p {
   margin: 0;
 }
+
 
 
 
