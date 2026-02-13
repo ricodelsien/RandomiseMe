@@ -77,27 +77,32 @@ document.addEventListener("DOMContentLoaded", function () {
       resultDiv.textContent = projects[randomIndex];
     }, 80);
 
-    setTimeout(() => {
-      clearInterval(interval);
-      button.classList.remove("rolling");
+setTimeout(() => {
+  clearInterval(interval);
+  button.classList.remove("rolling");
 
-      const exclamations = [
-  "Oh look!",
-  "Boom!",
-  "There it is!",
-  "Well well!",
-  "Guess what?",
-  "Plot twist!",
-  "Lucky you!",
-  "Here we go!",
-  "Ta-da!",
-  "Voilà!"
-];
+  const finalIndex = Math.floor(Math.random() * projects.length);
 
-const randomExclamation = exclamations[Math.floor(Math.random() * exclamations.length)];
+  const exclamations = [
+    "Oh look!",
+    "Boom!",
+    "There it is!",
+    "Well well!",
+    "Guess what?",
+    "Plot twist!",
+    "Lucky you!",
+    "Here we go!",
+    "Ta-da!",
+    "Voilà!"
+  ];
 
-resultDiv.textContent = randomExclamation + " " + projects[finalIndex];
-    }, 2000);
+  const randomExclamation =
+    exclamations[Math.floor(Math.random() * exclamations.length)];
+
+  resultDiv.textContent =
+    randomExclamation + " " + projects[finalIndex];
+
+}, 2000);
   };
 
   // import data (txt, csv handling)
@@ -173,6 +178,7 @@ document.addEventListener("keydown", function(event) {
   // render init
   renderProjects();
 });
+
 
 
 
