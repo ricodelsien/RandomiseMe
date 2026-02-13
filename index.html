@@ -8,14 +8,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <title>RandomiseMe!</title>
 
-  <!-- iOS Homescreen dummy-->
+  <!-- iOS Homescreen icon -->
   <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
-
-  <!-- optional size increase -->
   <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
 
   <!-- iOS Web App Mode -->
@@ -25,6 +24,7 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <div class="header">
@@ -33,18 +33,20 @@
 
   <div class="input-section">
     <form id="projectForm">
-      <input 
-        type="text" 
-        id="projectInput" 
-        placeholder="Enter project name" 
+      <input
+        type="text"
+        id="projectInput"
+        placeholder="Enter project name"
         autocomplete="off">
       <button type="submit">Add project</button>
     </form>
   </div>
 
-  <!-- Minimal Import Button -->
+  <!-- Import Button -->
   <div class="import-section">
-    <label for="fileInput" class="custom-file-button">📂 Import list (txt or csv)</label>
+    <label for="fileInput" class="custom-file-button">
+      📂 Import list (txt or csv)
+    </label>
     <input type="file" id="fileInput" accept=".txt,.csv" hidden>
   </div>
 
@@ -62,22 +64,34 @@
   <div id="result"></div>
 
   <!-- Help Button -->
-<button id="helpBtn" class="help-button">❓ HowTo</button>
+  <button id="helpBtn" class="help-button">❓ HowTo</button>
 
-<!-- Help Modal -->
-<div id="helpModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <h3>How to use RandomiseMe</h3>
-    <p>
-      1. Add projects manually or import a .txt or .csv list.<br><br>
-      2. When added click "Let's roll!" to randomly select a single project.<br><br>
-      3. Use "Clear all UFOs" to reset your list and start over.<br><br>
-      Imported lists can be separated by commas, semicolons or line breaks such as return or tab.
-    </p>
+  <!-- Help Modal -->
+  <div id="helpModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+
+      <h3>How to use RandomiseMe</h3>
+
+      <p>
+        1. Add projects manually or import a .txt or .csv list.<br><br>
+        2. Click "Let's roll!" to randomly select a single project.<br><br>
+        3. Use "Clear all UFOs" to reset your list.<br><br>
+        Imported lists can be separated by commas, semicolons, line breaks or tabs.
+      </p>
+
+      <hr style="margin:20px 0; opacity:0.3;">
+
+      <p style="font-size:14px; opacity:0.7;">
+        If the Home Screen app does not update properly:
+      </p>
+
+      <button id="reloadBtn" class="reload-button">
+        🔄 Reload app
+      </button>
+
+    </div>
   </div>
-</div>
-
 
   <footer class="app-info">
     <p>
@@ -87,12 +101,6 @@
   </footer>
 
   <script src="script.js"></script>
+
 </body>
 </html>
-
-
-
-
-
-
-
