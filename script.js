@@ -81,8 +81,22 @@ document.addEventListener("DOMContentLoaded", function () {
       clearInterval(interval);
       button.classList.remove("rolling");
 
-      const finalIndex = Math.floor(Math.random() * projects.length);
-      resultDiv.textContent = "Oh look, it's: " + projects[finalIndex];
+      const exclamations = [
+  "Oh look!",
+  "Boom!",
+  "There it is!",
+  "Well well!",
+  "Guess what?",
+  "Plot twist!",
+  "Lucky you!",
+  "Here we go!",
+  "Ta-da!",
+  "Voilà!"
+];
+
+const randomExclamation = exclamations[Math.floor(Math.random() * exclamations.length)];
+
+resultDiv.textContent = randomExclamation + " " + projects[finalIndex];
     }, 2000);
   };
 
@@ -159,6 +173,7 @@ document.addEventListener("keydown", function(event) {
   // render init
   renderProjects();
 });
+
 
 
 
