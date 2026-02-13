@@ -1,3 +1,9 @@
+<!-- Project: RandomiseMe! -->
+<!-- Cause: shuffle-pick large numbers of projects -->
+<!-- Author: Nico Siedler (git: ricodelsien) -->
+<!-- Date: 2026-02-13 -->
+<!-- Version: 0.2a -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +12,10 @@
 
   <title>RandomiseMe!</title>
 
-  <!-- iOS Home Screen Icon -->
+  <!-- iOS Homescreen dummy-->
   <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
 
-  <!-- Optional: größere Auflösung fallback -->
+  <!-- optional size increase -->
   <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
 
   <!-- iOS Web App Mode -->
@@ -47,6 +53,7 @@
   <h4>My UFO's:</h4>
   <ul id="projectList"></ul>
 
+  <!-- clear and shuffle buttons -->
   <div class="button-group">
     <button id="clearBtn" onclick="clearAll()">🗑 Clear all UFOs</button>
     <button id="randomBtn" onclick="roll()">🎲 Let's roll!</button>
@@ -56,13 +63,14 @@
 
   <footer class="app-info">
     <p>
-      RandomiseMe – created by Nico Siedler<br>
-      Version 0.1a published under GPL3 <span id="buildDate"></span>
+      RandomiseMe! – created by Nico Siedler<br>
+      Version 0.2a published under GPL3 <span id="buildDate"></span>
     </p>
   </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
