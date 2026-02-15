@@ -1,26 +1,26 @@
 <!-- Project: RandomiseMe! -->
 <!-- Cause: shuffle-pick large numbers of projects -->
 <!-- Author: Nico Siedler (git: ricodelsien) -->
-<!-- Date: 2026-02-13 -->
-<!-- Version: 0.2a -->
+<!-- Date: 2026-02-15 -->
+<!-- Version: 0.3c -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>RandomiseMe!</title>
 
-  <!-- iOS Homescreen icon -->
+  <!-- Icons -->
   <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
   <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
 
-  <!-- iOS Web App Mode -->
+  <!-- PWA Mode -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="RandomiseMe">
+  <meta name="mobile-web-app-capable" content="yes">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -32,26 +32,24 @@
   </div>
 
   <div class="flavour-text">
-  <p>
-    Still Drowning in projects?<br>
-    Time to tell them: Alea iacta est!<br>
-  </p>
-</div>
-  
+    <p id="flavourText">
+      Still Drowning in projects?<br>
+      Time to tell them: Alea iacta est!
+    </p>
+  </div>
+
   <div class="input-section">
     <form id="projectForm">
       <input
         type="text"
         id="projectInput"
-        placeholder="Enter project name"
         autocomplete="off">
-      <button type="submit">Add project</button>
+      <button type="submit" id="addBtn">Add project</button>
     </form>
   </div>
 
-  <!-- Import Button -->
   <div class="import-section">
-    <label for="fileInput" class="custom-file-button">
+    <label for="fileInput" class="custom-file-button" id="importLabel">
       📂 Import list (txt or csv)
     </label>
     <input type="file" id="fileInput" accept=".txt,.csv" hidden>
@@ -59,13 +57,12 @@
 
   <h3>__________</h3>
 
-  <h4>My UFO's:</h4>
+  <h4 id="ufoTitle">My UFO's:</h4>
   <ul id="projectList"></ul>
 
-  <!-- clear and shuffle buttons -->
   <div class="button-group">
-    <button id="clearBtn" onclick="clearAll()">🗑 Clear all UFOs</button>
-    <button id="randomBtn" onclick="roll()">🎲 Let's roll!</button>
+    <button id="clearBtn">🗑 Clear all UFOs</button>
+    <button id="randomBtn">🎲 Let's roll!</button>
   </div>
 
   <div id="result"></div>
@@ -74,13 +71,13 @@
   <button id="helpBtn" class="help-button">❓ HowTo</button>
 
   <!-- Help Modal -->
-  <div id="helpModal" class="modal">
+  <div id="helpModal" class="modal" aria-hidden="true">
     <div class="modal-content">
-      <span class="close-btn">&times;</span>
+      <span class="close-btn" role="button" aria-label="Close">&times;</span>
 
-      <h3>How to use RandomiseMe</h3>
+      <h3 id="helpTitle">How to use RandomiseMe</h3>
 
-      <p>
+      <p id="helpText">
         1. Add projects manually or import a .txt or .csv list.<br><br>
         2. Click "Let's roll!" to randomly select a single project.<br><br>
         3. Use "Clear all UFOs" to reset your list.<br><br>
@@ -89,30 +86,29 @@
 
       <hr style="margin:20px 0; opacity:0.3;">
 
-      <p style="font-size:14px; opacity:0.7;">
+      <p style="font-size:14px; opacity:0.7;" id="reloadHint">
         If the Home Screen app does not update properly:
       </p>
 
       <button id="reloadBtn" class="reload-button">
         🔄 Reload app
       </button>
-
     </div>
+  </div>
+
+  <!-- LANGUAGE SWITCH -->
+  <div class="language-switch">
+    <button data-lang="de">🇩🇪 DE</button>
+    <button data-lang="en">🇬🇧 EN</button>
   </div>
 
   <footer class="app-info">
     <p>
       RandomiseMe! – created by Nico Siedler<br>
-      Version 0.2a 02/2026 published under GPL3 <span id="buildDate"></span>
+      Version 0.3c 02/2026 published under GPL3
     </p>
   </footer>
 
   <script src="script.js"></script>
-
 </body>
 </html>
-
-
-
-
-
