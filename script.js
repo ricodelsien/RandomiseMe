@@ -1,22 +1,45 @@
+// ===== 1. KONFIGURATION =====
+
 const translations = {
   de: {
-    title: "Projekt-Zufallsauswahl",
-    addButton: "Hinzufügen",
     randomButton: "🎲 Zufall wählen",
     chosen: "Gewählt:"
   },
   en: {
-    title: "Project Randomizer",
-    addButton: "Add",
     randomButton: "🎲 Random Pick",
     chosen: "Selected:"
   }
 };
 
 let currentLanguage = localStorage.getItem("language") || "de";
+let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
 
-document.addEventListener("DOMContentLoaded", function () {
+// ===== 2. FUNKTIONEN =====
+
+function saveProjects() {
+  localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+function switchLanguage(lang) {
+  currentLanguage = lang;
+  localStorage.setItem("language", lang);
+  applyTranslations();
+}
+
+function applyTranslations() {
+  document.getElementById("randomBtn").textContent =
+    translations[currentLanguage].randomButton;
+}
+
+
+// ===== 3. EVENT LISTENER =====
+
+document.addEventListener("DOMContentLoaded", function() {
+  renderProjects();
+  applyTranslations();
+});
+
 
   // import projects from txt or csv
   let projects = JSON.parse(localStorage.getItem("projects")) || [];
@@ -212,5 +235,6 @@ if (reloadBtn) {
   // initial render
   renderProjects();
 });
+
 
 
