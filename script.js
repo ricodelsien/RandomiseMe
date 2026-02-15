@@ -302,7 +302,45 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   setupImport();
-  setupModal();
   setupReloadButton();
 });
+
+function openHelp() {
+  const modal = document.getElementById("helpModal");
+  if (modal) {
+    modal.style.display = "block";
+    modal.setAttribute("aria-hidden", "false");
+  }
+}
+
+function closeHelp() {
+  const modal = document.getElementById("helpModal");
+  if (modal) {
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const closeBtn = document.querySelector(".close-btn");
+  const modal = document.getElementById("helpModal");
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeHelp);
+  }
+
+  window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closeHelp();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeHelp();
+    }
+  });
+});
+
+
 
