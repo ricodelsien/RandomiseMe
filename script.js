@@ -40,6 +40,12 @@ document.addEventListener("DOMContentLoaded", function() {
   applyTranslations();
 });
 
+document.getElementById("projectInput")
+  .addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      addProject();
+    }
+});
 
   // import projects from txt or csv
   let projects = JSON.parse(localStorage.getItem("projects")) || [];
@@ -235,6 +241,7 @@ if (reloadBtn) {
   // initial render
   renderProjects();
 });
+
 
 
 
