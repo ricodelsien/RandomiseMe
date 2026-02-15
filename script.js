@@ -1,3 +1,21 @@
+const translations = {
+  de: {
+    title: "Projekt-Zufallsauswahl",
+    addButton: "Hinzufügen",
+    randomButton: "🎲 Zufall wählen",
+    chosen: "Gewählt:"
+  },
+  en: {
+    title: "Project Randomizer",
+    addButton: "Add",
+    randomButton: "🎲 Random Pick",
+    chosen: "Selected:"
+  }
+};
+
+let currentLanguage = localStorage.getItem("language") || "de";
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
   // import projects from txt or csv
@@ -194,4 +212,5 @@ if (reloadBtn) {
   // initial render
   renderProjects();
 });
+
 
