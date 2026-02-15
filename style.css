@@ -2,7 +2,7 @@
    Project: RandomiseMe!
    Author: Nico Siedler (git: ricodelsien)
    File: style.css
-   Version: 0.3b
+   Version: 0.3c
    Date: 2026-02-15
    Description:
    - Dark minimal UI
@@ -163,14 +163,12 @@ li {
   min-height: 40px;
 }
 
-/* Highlighted result */
 .result-highlight {
   color: #ff8c00;
   font-weight: bold;
   text-shadow: 0 0 8px rgba(255, 140, 0, 0.6);
 }
 
-/* Winner glow */
 .winner-glow {
   animation: glow 0.8s ease-in-out 3 alternate;
 }
@@ -225,7 +223,6 @@ li {
   margin: 0 5px;
 }
 
-/* aktive Sprache */
 .language-switch button.active {
   background: #00bfa6;
   color: black;
