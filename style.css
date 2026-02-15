@@ -1,17 +1,33 @@
+/* =========================================================
+   Project: RandomiseMe!
+   Author: Nico Siedler (git: ricodelsien)
+   File: style.css
+   Version: 0.3c
+   Date: 2026-02-15
+   Description:
+   - Dark minimal UI
+   - Mobile first
+   - Modal support
+   - Multi-language ready
+   ========================================================= */
+
+
 /* ========== BASE ========== */
 
-body {
+html, body {
+  margin: 0;
+  padding: 0;
   background-color: #000;
   color: white;
-  margin: 0;
-  padding: 20px;
-  text-align: center;
   font-family: Arial, sans-serif;
-}
-
-html, body {
+  text-align: center;
   touch-action: manipulation;
 }
+
+body {
+  padding: 20px;
+}
+
 
 /* ========== HEADER ========== */
 
@@ -22,7 +38,8 @@ html, body {
   margin-bottom: 30px;
 }
 
-/* ========== FLAVOUR ========== */
+
+/* ========== FLAVOUR TEXT ========== */
 
 .flavour-text {
   margin-bottom: 25px;
@@ -34,6 +51,7 @@ html, body {
   margin-right: auto;
 }
 
+
 /* ========== INPUT FIELD ========== */
 
 input[type="text"] {
@@ -43,12 +61,14 @@ input[type="text"] {
   background-color: #111;
   color: white;
   font-size: 14px;
+  min-width: 220px;
 }
 
 input[type="text"]:focus {
   outline: none;
   border-color: #00b3a4;
 }
+
 
 /* ========== BUTTON BASE STYLE ========== */
 
@@ -65,17 +85,16 @@ button,
   font-size: 14px;
 }
 
-/* Hover */
 button:hover,
 .custom-file-button:hover {
   background-color: #2a2a2a;
 }
 
-/* Active */
 button:active,
 .custom-file-button:active {
   transform: scale(0.96);
 }
+
 
 /* ========== IMPORT SECTION ========== */
 
@@ -83,11 +102,13 @@ button:active,
   margin-top: 10px;
 }
 
+
 /* ========== BUTTON GROUP ========== */
 
 .button-group {
   margin-top: 20px;
 }
+
 
 /* ========== PRIMARY BUTTON (ROLL) ========== */
 
@@ -106,6 +127,7 @@ button:active,
   transform: scale(0.95);
 }
 
+
 /* ========== CLEAR BUTTON (DANGER STYLE) ========== */
 
 #clearBtn {
@@ -118,16 +140,19 @@ button:active,
   background-color: rgba(255, 0, 0, 0.1);
 }
 
+
 /* ========== PROJECT LIST ========== */
 
 ul {
   list-style-position: inside;
   padding: 0;
+  margin: 10px 0;
 }
 
 li {
   margin: 8px 0;
 }
+
 
 /* ========== RESULT DISPLAY ========== */
 
@@ -138,26 +163,21 @@ li {
   min-height: 40px;
 }
 
-/* tinted result */
 .result-highlight {
-  color: #ff8c00;   /* bright orange */
+  color: #ff8c00;
   font-weight: bold;
   text-shadow: 0 0 8px rgba(255, 140, 0, 0.6);
 }
 
-/* Gewinner-Glow */
 .winner-glow {
   animation: glow 0.8s ease-in-out 3 alternate;
 }
 
 @keyframes glow {
-  from {
-    text-shadow: 0 0 5px #00b3a4;
-  }
-  to {
-    text-shadow: 0 0 20px #00ffe5;
-  }
+  from { text-shadow: 0 0 5px #00b3a4; }
+  to   { text-shadow: 0 0 20px #00ffe5; }
 }
+
 
 /* ========== ROLLING ANIMATION ========== */
 
@@ -171,9 +191,9 @@ li {
   100% { transform: rotate(-3deg); }
 }
 
-/* ========== FOOTER ========== */
 
-/* Help Button */
+/* ========== HELP BUTTON ========== */
+
 .help-button {
   margin-top: 40px;
   background: transparent;
@@ -181,38 +201,56 @@ li {
   color: #00b3a4;
   border-radius: 20px;
   padding: 6px 12px;
-  cursor: pointer;
 }
 
 .help-button:hover {
   background-color: rgba(0, 179, 164, 0.1);
 }
 
-/* Modal Background */
+
+/* ========== LANGUAGE SWITCH ========== */
+
+.language-switch {
+  margin-top: 15px;
+}
+
+.language-switch button {
+  background: transparent;
+  border: 1px solid #00bfa6;
+  color: #00bfa6;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin: 0 5px;
+}
+
+.language-switch button.active {
+  background: #00bfa6;
+  color: black;
+}
+
+
+/* ========== MODAL ========== */
+
 .modal {
   display: none;
   position: fixed;
   z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Modal Box */
 .modal-content {
   background-color: #111;
-  margin: 15% auto;
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #444;
   border-radius: 12px;
   width: 85%;
   max-width: 400px;
   text-align: left;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
 }
 
-/* Close Button */
 .close-btn {
   float: right;
   font-size: 22px;
@@ -225,6 +263,8 @@ li {
 }
 
 
+/* ========== FOOTER ========== */
+
 .app-info {
   margin-top: 60px;
   font-size: 12px;
@@ -234,10 +274,3 @@ li {
 .app-info p {
   margin: 0;
 }
-
-
-
-
-
-
-
