@@ -203,7 +203,6 @@ li {
   cursor: pointer;
 }
 
-
 /* Modal Background */
 .modal {
   display: none;
@@ -250,6 +249,7 @@ li {
 .app-info p {
   margin: 0;
 }
+
 
 
 
