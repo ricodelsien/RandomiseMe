@@ -28,220 +28,96 @@ function switchLanguage(lang) {
 }
 
 function applyTranslations() {
-  document.getElementById("randomBtn").textContent =
-    translations[currentLanguage].randomButton;
+  const btn = document.getElementById("randomBtn");
+  if (btn) {
+    btn.textContent = translations[currentLanguage].randomButton;
+  }
 }
 
+function addProject() {
+  const input = document.getElementById("projectInput");
+  const name = input.value.trim();
 
-// ===== 3. EVENT LISTENER =====
+  if (name === "") return;
 
-document.addEventListener("DOMContentLoaded", function() {
-  renderProjects();
-  applyTranslations();
-});
-
-document.getElementById("projectInput")
-  .addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      addProject();
-    }
-});
-
-  // import projects from txt or csv
-  let projects = JSON.parse(localStorage.getItem("projects")) || [];
-
-  // save project
-  function saveProjects() {
-    localStorage.setItem("projects", JSON.stringify(projects));
-  }
-
-  // add project
-  function addProject() {
-    const input = document.getElementById("projectInput");
-    const name = input.value.trim();
-
-    if (name === "") return;
-
-    if (!projects.some(p => p.toLowerCase() === name.toLowerCase())) {
-      projects.push(name);
-      saveProjects();
-      renderProjects();
-    }
-
-    input.value = "";
-    input.focus();
-  }
-
-  // delete project
-  window.deleteProject = function(index) {
-    projects.splice(index, 1);
+  if (!projects.some(p => p.toLowerCase() === name.toLowerCase())) {
+    projects.push(name);
     saveProjects();
     renderProjects();
-  };
-
-  // delete entire list
-  window.clearAll = function() {
-    const confirmDelete = confirm("Do you really want to clear the list?");
-    if (!confirmDelete) return;
-
-    projects = [];
-    localStorage.removeItem("projects");
-    renderProjects();
-    document.getElementById("result").innerHTML = "";
-  };
-
-  // show list
-  function renderProjects() {
-    const list = document.getElementById("projectList");
-    list.innerHTML = "";
-
-    projects.forEach((project, index) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        ${project}
-        <button onclick="deleteProject(${index})">❌</button>
-      `;
-      list.appendChild(li);
-    });
   }
 
-  // randomiser
-  window.roll = function() {
-    if (projects.length === 0) {
-      alert("No projects added yet!");
-      return;
-    }
+  input.value = "";
+}
 
-    const resultDiv = document.getElementById("result");
-    const button = document.getElementById("randomBtn");
+function deleteProject(index) {
+  projects.splice(index, 1);
+  saveProjects();
+  renderProjects();
+}
 
-    button.classList.add("rolling");
+function renderProjects() {
+  const list = document.getElementById("projectList");
+  if (!list) return;
 
-    const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * projects.length);
-      resultDiv.textContent = projects[randomIndex];
-    }, 80);
+  list.innerHTML = "";
 
-    setTimeout(() => {
-      clearInterval(interval);
-      button.classList.remove("rolling");
-
-      const finalIndex = Math.floor(Math.random() * projects.length);
-
-      const exclamations = [
-        "Oh look:",
-        "Bäm:",
-        "Take that:",
-        "Well:",
-        "Guess what:",
-        "Plot twist:",
-        "Lucky you:",
-        "Here we go:",
-        "Ta-da:",
-        "Et voilà:"
-      ];
-
-      const randomExclamation =
-        exclamations[Math.floor(Math.random() * exclamations.length)];
-
-      // Reset glow animation only
-      resultDiv.classList.remove("winner-glow");
-      void resultDiv.offsetWidth;
-
-      // Only project name orange
-      resultDiv.innerHTML =
-        randomExclamation +
-        " <span class='result-highlight'>" +
-        projects[finalIndex] +
-        "</span>";
-
-      resultDiv.classList.add("winner-glow");
-
-    }, 2000);
-  };
-
-  const reloadBtn = document.getElementById("reloadBtn");
-
-if (reloadBtn) {
-  reloadBtn.addEventListener("click", function() {
-    const url = window.location.pathname + "?v=" + Date.now();
-    window.location.href = url;
+  projects.forEach((project, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      ${project}
+      <button onclick="deleteProject(${index})">❌</button>
+    `;
+    list.appendChild(li);
   });
 }
 
+function roll() {
+  if (projects.length === 0) {
+    alert("No projects added yet!");
+    return;
+  }
 
-  // import data
-  document.getElementById("fileInput").addEventListener("change", function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+  const resultDiv = document.getElementById("result");
+  const button = document.getElementById("randomBtn");
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
+  button.classList.add("rolling");
 
-      const content = e.target.result;
-      const entries = content.split(/[\r\n,;\t]+/);
+  const interval = setInterval(() => {
+    const randomIndex = Math.floor(Math.random() * projects.length);
+    resultDiv.textContent = projects[randomIndex];
+  }, 80);
 
-      let added = 0;
+  setTimeout(() => {
+    clearInterval(interval);
+    button.classList.remove("rolling");
 
-      entries.forEach(entry => {
-        let trimmed = entry.trim();
-        trimmed = trimmed.replace(/^"(.*)"$/, '$1');
+    const finalIndex = Math.floor(Math.random() * projects.length);
 
-        if (
-          trimmed !== "" &&
-          !projects.some(p => p.toLowerCase() === trimmed.toLowerCase())
-        ) {
-          projects.push(trimmed);
-          added++;
-        }
-      });
+    resultDiv.innerHTML =
+      translations[currentLanguage].chosen +
+      " <span class='result-highlight'>" +
+      projects[finalIndex] +
+      "</span>";
 
-      saveProjects();
-      renderProjects();
+  }, 2000);
+}
 
-      alert(`Import finished: ${added} new projects added.`);
-    };
 
-    reader.readAsText(file);
-  });
+// ===== 3. DOM READY =====
 
-  // activate add on enter
-  document.getElementById("projectForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    addProject();
-  });
+document.addEventListener("DOMContentLoaded", function() {
 
-  // help modal
-  const modal = document.getElementById("helpModal");
-  const helpBtn = document.getElementById("helpBtn");
-  const closeBtn = document.querySelector(".close-btn");
+  renderProjects();
+  applyTranslations();
 
-  if (helpBtn && modal && closeBtn) {
-    helpBtn.addEventListener("click", function() {
-      modal.style.display = "block";
-    });
-
-    closeBtn.addEventListener("click", function() {
-      modal.style.display = "none";
-    });
-
-    window.addEventListener("click", function(event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "Escape") {
-        modal.style.display = "none";
+  // Enter-Taste
+  const input = document.getElementById("projectInput");
+  if (input) {
+    input.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        addProject();
       }
     });
   }
 
-  // initial render
-  renderProjects();
 });
-
-
-
-
