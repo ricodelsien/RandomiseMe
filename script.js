@@ -2,21 +2,19 @@
    Project: RandomiseMe!
    Author: Nico Siedler (git: ricodelsien)
    File: script.js
-   Version: 0.3b
+   Version: 0.3c
    Date: 2026-02-15
    Description:
    - Random project shuffler
    - Multi-language (DE / EN)
    - LocalStorage persistence
-   - Modal support
+   - Modal support (HowTo)
+   - Import support (.txt/.csv)
    ========================================================= */
-
-
-// ===== 1. KONFIGURATION =====
 
 const translations = {
   de: {
-    flavour: "Erstickst Du an Deinen Projekten?<br>Dann sag ihnen: Alea iacta est!",
+    flavour: "Ertrinkst du noch in Projekten?<br>Dann sag ihnen: Alea iacta est!",
     inputPlaceholder: "Projekt eingeben",
     addBtn: "Hinzufügen",
     importLabel: "📂 Liste importieren (txt oder csv)",
@@ -60,51 +58,65 @@ const translations = {
 let currentLanguage = localStorage.getItem("language") || "en";
 let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
-
-// ===== 2. SPEICHER =====
-
 function saveProjects() {
   localStorage.setItem("projects", JSON.stringify(projects));
 }
 
-
-// ===== 3. ÜBERSETZUNG =====
-
 function applyTranslations() {
   const t = translations[currentLanguage];
-
   document.documentElement.lang = currentLanguage;
 
-  document.getElementById("flavourText").innerHTML = t.flavour;
-  document.getElementById("projectInput").placeholder = t.inputPlaceholder;
-  document.getElementById("addBtn").textContent = t.addBtn;
-  document.getElementById("importLabel").textContent = t.importLabel;
-  document.getElementById("ufoTitle").textContent = t.ufoTitle;
-  document.getElementById("clearBtn").textContent = t.clearBtn;
-  document.getElementById("randomBtn").textContent = t.rollBtn;
-  document.getElementById("helpBtn").textContent = t.helpBtn;
-  document.getElementById("helpTitle").textContent = t.helpTitle;
-  document.getElementById("helpText").innerHTML = t.helpText;
-  document.getElementById("reloadHint").textContent = t.reloadHint;
+  // Defensive: only set if elements exist
+  const flavourText = document.getElementById("flavourText");
+  if (flavourText) flavourText.innerHTML = t.flavour;
 
-  // aktive Sprache markieren
-  document.querySelectorAll(".language-switch button")
-    .forEach(btn => {
-      btn.classList.toggle("active", btn.dataset.lang === currentLanguage);
-    });
+  const projectInput = document.getElementById("projectInput");
+  if (projectInput) projectInput.placeholder = t.inputPlaceholder;
+
+  const addBtn = document.getElementById("addBtn");
+  if (addBtn) addBtn.textContent = t.addBtn;
+
+  const importLabel = document.getElementById("importLabel");
+  if (importLabel) importLabel.textContent = t.importLabel;
+
+  const ufoTitle = document.getElementById("ufoTitle");
+  if (ufoTitle) ufoTitle.textContent = t.ufoTitle;
+
+  const clearBtn = document.getElementById("clearBtn");
+  if (clearBtn) clearBtn.textContent = t.clearBtn;
+
+  const randomBtn = document.getElementById("randomBtn");
+  if (randomBtn) randomBtn.textContent = t.rollBtn;
+
+  const helpBtn = document.getElementById("helpBtn");
+  if (helpBtn) helpBtn.textContent = t.helpBtn;
+
+  const helpTitle = document.getElementById("helpTitle");
+  if (helpTitle) helpTitle.textContent = t.helpTitle;
+
+  const helpText = document.getElementById("helpText");
+  if (helpText) helpText.innerHTML = t.helpText;
+
+  const reloadHint = document.getElementById("reloadHint");
+  if (reloadHint) reloadHint.textContent = t.reloadHint;
+
+  // Active language highlight
+  document.querySelectorAll(".language-switch button").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === currentLanguage);
+  });
 }
 
 function switchLanguage(lang) {
+  if (!translations[lang]) return;
   currentLanguage = lang;
   localStorage.setItem("language", lang);
   applyTranslations();
 }
 
-
-// ===== 4. PROJEKT-FUNKTIONEN =====
-
 function renderProjects() {
   const list = document.getElementById("projectList");
+  if (!list) return;
+
   list.innerHTML = "";
 
   projects.forEach((project, index) => {
@@ -119,6 +131,8 @@ function renderProjects() {
 
 function addProject() {
   const input = document.getElementById("projectInput");
+  if (!input) return;
+
   const name = input.value.trim();
   if (!name) return;
 
@@ -137,17 +151,19 @@ function deleteProject(index) {
   renderProjects();
 }
 
+// ensure inline onclick can find it
+window.deleteProject = deleteProject;
+
 function clearAll() {
   if (!confirm(translations[currentLanguage].clearConfirm)) return;
 
   projects = [];
   localStorage.removeItem("projects");
   renderProjects();
-  document.getElementById("result").innerHTML = "";
+
+  const result = document.getElementById("result");
+  if (result) result.innerHTML = "";
 }
-
-
-// ===== 5. RANDOMIZER =====
 
 function roll() {
   if (projects.length === 0) {
@@ -157,6 +173,7 @@ function roll() {
 
   const resultDiv = document.getElementById("result");
   const button = document.getElementById("randomBtn");
+  if (!resultDiv || !button) return;
 
   button.classList.add("rolling");
 
@@ -176,39 +193,115 @@ function roll() {
       " <span class='result-highlight'>" +
       projects[finalIndex] +
       "</span>";
-
   }, 2000);
 }
 
+function setupModal() {
+  const modal = document.getElementById("helpModal");
+  const helpBtn = document.getElementById("helpBtn");
+  const closeBtn = document.querySelector(".close-btn");
+  if (!modal || !helpBtn || !closeBtn) return;
 
-// ===== 6. DOM READY =====
+  const open = () => {
+    modal.style.display = "block";
+    modal.setAttribute("aria-hidden", "false");
+  };
 
-document.addEventListener("DOMContentLoaded", function() {
+  const close = () => {
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+  };
 
+  helpBtn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) close();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") close();
+  });
+}
+
+function setupReloadButton() {
+  const reloadBtn = document.getElementById("reloadBtn");
+  if (!reloadBtn) return;
+
+  reloadBtn.addEventListener("click", () => {
+    // best-effort reload (works for Safari / iOS home-screen too)
+    window.location.href = window.location.pathname + "?v=" + Date.now();
+  });
+}
+
+function setupImport() {
+  const fileInput = document.getElementById("fileInput");
+  if (!fileInput) return;
+
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = String(e.target.result || "");
+      const entries = content.split(/[\r\n,;\t]+/);
+
+      let changed = false;
+
+      entries.forEach(entry => {
+        let trimmed = entry.trim();
+        // remove surrounding quotes
+        trimmed = trimmed.replace(/^"(.*)"$/, "$1");
+
+        if (!trimmed) return;
+
+        if (!projects.some(p => p.toLowerCase() === trimmed.toLowerCase())) {
+          projects.push(trimmed);
+          changed = true;
+        }
+      });
+
+      if (changed) {
+        saveProjects();
+        renderProjects();
+      }
+
+      // allow importing same file again later
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
   renderProjects();
   applyTranslations();
 
-  // Form Submit
-  document.getElementById("projectForm")
-    .addEventListener("submit", function(event) {
+  // Form submit (Enter + button)
+  const form = document.getElementById("projectForm");
+  if (form) {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
       addProject();
     });
+  }
 
-  // Buttons
-  document.getElementById("clearBtn")
-    .addEventListener("click", clearAll);
+  const clearBtn = document.getElementById("clearBtn");
+  if (clearBtn) clearBtn.addEventListener("click", clearAll);
 
-  document.getElementById("randomBtn")
-    .addEventListener("click", roll);
+  const randomBtn = document.getElementById("randomBtn");
+  if (randomBtn) randomBtn.addEventListener("click", roll);
 
-  // Sprache
-  document.querySelectorAll(".language-switch button")
-    .forEach(btn => {
-      btn.addEventListener("click", function() {
-        switchLanguage(this.dataset.lang);
-      });
+  // Language buttons
+  document.querySelectorAll(".language-switch button").forEach(btn => {
+    btn.addEventListener("click", function() {
+      switchLanguage(this.dataset.lang);
     });
+  });
 
+  setupImport();
+  setupModal();
+  setupReloadButton();
 });
-
