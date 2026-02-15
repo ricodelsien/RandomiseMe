@@ -16,7 +16,7 @@
 
 const translations = {
   de: {
-    flavour: "Ertrinkst du noch in Projekten?<br>Dann sag ihnen: Alea iacta est!",
+    flavour: "Erstickst Du an Deinen Projekten?<br>Dann sag ihnen: Alea iacta est!",
     inputPlaceholder: "Projekt eingeben",
     addBtn: "Hinzufügen",
     importLabel: "📂 Liste importieren (txt oder csv)",
@@ -211,3 +211,4 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
