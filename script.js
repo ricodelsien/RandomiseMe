@@ -2,12 +2,22 @@
 
 const translations = {
   de: {
-    randomButton: "🎲 Zufall wählen",
-    chosen: "Gewählt:"
+    addButton: "Add project",
+    inputPlaceholder: "Enter project name",
+    clearButton: "🗑 Clear all UFOs",
+    rollButton: "🎲 Let's roll!",
+    howTo: "❓ HowTo",
+    chosen: "Gewählt:",
+    emptyAlert: "Noch keine Projekte vorhanden!"
   },
   en: {
-    randomButton: "🎲 Random Pick",
-    chosen: "Selected:"
+    addButton: "Add project",
+    inputPlaceholder: "Enter project name",
+    clearButton: "🗑 Clear all UFOs",
+    rollButton: "🎲 Let's roll!",
+    howTo: "❓ HowTo",
+    chosen: "Selected:",
+    emptyAlert: "No projects added yet!"
   }
 };
 
@@ -121,3 +131,4 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
+
