@@ -188,6 +188,22 @@ li {
   background-color: rgba(0, 179, 164, 0.1);
 }
 
+/* Language choice */
+.language-switch {
+  margin-top: 15px;
+}
+
+.language-switch button {
+  background: transparent;
+  border: 1px solid #00bfa6;
+  color: #00bfa6;
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+
 /* Modal Background */
 .modal {
   display: none;
@@ -234,6 +250,7 @@ li {
 .app-info p {
   margin: 0;
 }
+
 
 
 
