@@ -72,7 +72,7 @@
   },
 
   "de": {
-    "lang.name": "Deutsch",
+    "lang.name": "🇩🇪 DE",
     "lang.label": "Sprache",
     "flavour.text": "Hallo, wie geht’s dir heute? <br> Lass uns ein Projekt finden! :)",
     "input.placeholder": "Projektname eingeben",
@@ -143,7 +143,7 @@
   },
 
   "fr": {
-    "lang.name": "Français",
+    "lang.name": "🇫🇷 FR",
     "lang.label": "Langue",
     "flavour.text": "Salut, comment ça va ? <br> Trouvons un projet ! :)",
     "input.placeholder": "Nom de projet",
@@ -214,7 +214,7 @@
   },
 
   "it": {
-    "lang.name": "Italiano",
+    "lang.name": "🇮🇹 IT",
     "lang.label": "Lingua",
     "flavour.text": "Ciao, come va oggi? <br> Troviamo un nuovo progetto! :)",
     "input.placeholder": "Inserisci nome progetto",
@@ -285,7 +285,7 @@
   },
 
   "es": {
-    "lang.name": "Español",
+    "lang.name": "🇪🇸 ES",
     "lang.label": "Idioma",
     "flavour.text": "Hola! ¿Qué tal estás? <br> ¡Vamos a elegir un proyecto! :)",
     "input.placeholder": "Escribe el nombre del proyecto",
@@ -356,7 +356,7 @@
   },
 
   "pl": {
-    "lang.name": "Polski",
+    "lang.name": "🇵🇱 PL",
     "lang.label": "Język",
     "flavour.text": "Cześć, jak się masz? <br> Wybierzmy nowy projekt! :)",
     "input.placeholder": "Wpisz nazwę projektu",
@@ -427,7 +427,7 @@
   },
 
   "pt": {
-    "lang.name": "Português",
+    "lang.name": "🇵🇹 PT",
     "lang.label": "Idioma",
     "flavour.text": "Olá, como você está? <br> Vamos escolher um projeto! :)",
     "input.placeholder": "Escreve o nome do projeto",
@@ -498,7 +498,7 @@
   },
 
   "sv": {
-    "lang.name": "Svenska",
+    "lang.name": "🇸🇪 SV",
     "lang.label": "Språk",
     "flavour.text": "Hej, hur mår du i dag? <br> Nu väljer vi ett projekt! :)",
     "input.placeholder": "Skriv projektnamn",
@@ -569,7 +569,7 @@
   },
 
   "da": {
-    "lang.name": "Dansk",
+    "lang.name": "🇩🇰 DA",
     "lang.label": "Sprog",
     "flavour.text": "Hej, hvordan har du det i dag? <br> Lad os vælge et projekt! :)",
     "input.placeholder": "Indtast projektnavn",
@@ -640,7 +640,7 @@
   },
 
   "ru": {
-    "lang.name": "Русский",
+    "lang.name": "🇷🇺 RU",
     "lang.label": "Язык",
     "flavour.text": "Привет, как ты сегодня? <br> Давай выберем проект! :)",
     "input.placeholder": "Введите название проекта",
@@ -711,7 +711,7 @@
   },
 
   "cs": {
-    "lang.name": "Čeština",
+    "lang.name": "🇨🇿 CS",
     "lang.label": "Jazyk",
     "flavour.text": "Ahoj, jak se máš dnes? <br> Vyberme si projekt! :)",
     "input.placeholder": "Zadej název projektu",
@@ -782,7 +782,7 @@
   },
 
   "nb": {
-    "lang.name": "Norsk",
+    "lang.name": "🇳🇴 NO",
     "lang.label": "Språk",
     "flavour.text": "Hei, hvordan har du det i dag? <br> La oss velge et prosjekt! :)",
     "input.placeholder": "Skriv prosjektnavn",
@@ -853,7 +853,7 @@
   },
 
   "fi": {
-    "lang.name": "Suomi",
+    "lang.name": "🇫🇮 FI",
     "lang.label": "Kieli",
     "flavour.text": "Hei, miten voit tänään? <br> Valitaan projekti! :)",
     "input.placeholder": "Syötä projektin nimi",
@@ -921,7 +921,292 @@
       "Ta‑da:",
       "Et voilà:"
     ]
-  }
+  },
+
+    "uk": {
+  "lang.name": "🇺🇦 UK",
+  "lang.label": "Мова",
+  "flavour.text": "Привіт, як ти сьогодні? <br> Давай виберемо проєкт! :)",
+  "input.placeholder": "Введіть назву проєкту",
+  "btn.add": "Додати",
+  "btn.import": "📂 Імпорт списку (txt або csv)",
+  "heading.list": "Мої незавершені проєкти:",
+  "btn.clear": "🗑 Очистити все",
+  "btn.roll": "🎲 Поїхали!",
+
+  "heading.done": "Зроблено:",
+  "heading.history": "Історія:",
+  "btn.clear_done": "🧹 Очистити «Зроблено»",
+  "btn.clear_history": "🗑 Очистити історію",
+  "btn.copy_history": "📋 Скопіювати історію",
+  "btn.mark_done": "✅ Позначити як зроблено",
+  "btn.copy": "📋 Скопіювати",
+  "btn.undo": "Скасувати",
+
+  "help.btn": "❓ Як користуватися",
+  "help.title": "Як користуватися RandomiseMe",
+  "help.body": "1. Додавай проєкти вручну або імпортуй список .txt чи .csv.<br><br>2. Натисни « Поїхали! », щоб випадково обрати один проєкт.<br><br>3. « Очистити все » скидає список.<br><br>У списках для імпорту розділювачами можуть бути коми, крапки з комою, переноси рядків або табуляція.",
+  "help.update_hint": "Якщо застосунок на головному екрані не оновлюється коректно:",
+  "help.reload": "🔄 Перезавантажити застосунок",
+
+  "footer.created": "RandomiseMe! – автор: Nico Siedler",
+  "footer.license": "Версія 0.3a 02/2026 опубліковано під GPL3",
+
+  "confirm.clear": "Очистити всі активні проєкти? («Зроблено» та історія залишаться.)",
+  "confirm.clear_done": "Очистити список «Зроблено»?",
+  "confirm.clear_history": "Очистити історію?",
+
+  "alert.no_projects": "Проєкти ще не додані!",
+  "alert.import_finished": "Імпорт завершено: додано нових проєктів — {count}.",
+  "alert.import_restored": "(+{count} відновлено)",
+  "alert.nothing_to_copy": "Поки що нічого копіювати.",
+
+  "toast.copied": "Скопійовано в буфер обміну.",
+  "toast.deleted": "Видалено: {name}",
+  "toast.done": "Позначено як зроблено: {name}",
+  "toast.restored": "Відновлено: {name}",
+  "toast.cleared_active": "Активний список очищено.",
+  "toast.cleared_done": "Список «Зроблено» очищено.",
+  "toast.cleared_history": "Історію очищено.",
+
+  "history.roll": "Обрано",
+  "history.done": "Зроблено",
+  "history.restore": "Відновлено",
+  "history.delete": "Видалено",
+
+  "aria.delete": "Видалити",
+  "aria.done": "Позначити як зроблено",
+  "aria.restore": "Відновити",
+  "aria.copy": "Скопіювати",
+  "aria.undo": "Скасувати",
+
+  "exclamations": [
+    "Дивись:",
+    "Бам:",
+    "Тримай:",
+    "Ну що ж:",
+    "Вгадай:",
+    "Оце так поворот:",
+    "Пощастило тобі:",
+    "Поїхали:",
+    "Та-дам:",
+    "Et voilà:"
+  ]
+},
+
+"el": {
+  "lang.name": "🇬🇷 GR",
+  "lang.label": "Γλώσσα",
+  "flavour.text": "Γεια σου, πώς είσαι σήμερα; <br> Πάμε να διαλέξουμε ένα πρότζεκτ! :)",
+  "input.placeholder": "Πληκτρολόγησε το όνομα του πρότζεκτ",
+  "btn.add": "Προσθήκη",
+  "btn.import": "📂 Εισαγωγή λίστας (txt ή csv)",
+  "heading.list": "Τα ανολοκλήρωτα πρότζεκτ μου:",
+  "btn.clear": "🗑 Καθαρισμός όλων",
+  "btn.roll": "🎲 Πάμε!",
+
+  "heading.done": "Ολοκληρωμένα:",
+  "heading.history": "Ιστορικό:",
+  "btn.clear_done": "🧹 Καθαρισμός «Ολοκληρωμένων»",
+  "btn.clear_history": "🗑 Καθαρισμός ιστορικού",
+  "btn.copy_history": "📋 Αντιγραφή ιστορικού",
+  "btn.mark_done": "✅ Σήμανση ως ολοκληρωμένο",
+  "btn.copy": "📋 Αντιγραφή",
+  "btn.undo": "Αναίρεση",
+
+  "help.btn": "❓ Οδηγίες",
+  "help.title": "Πώς να χρησιμοποιήσεις το RandomiseMe",
+  "help.body": "1. Πρόσθεσε πρότζεκτ χειροκίνητα ή εισήγαγε λίστα .txt ή .csv.<br><br>2. Πάτησε « Πάμε! » για να επιλέξεις τυχαία ένα πρότζεκτ.<br><br>3. Το « Καθαρισμός όλων » μηδενίζει τη λίστα.<br><br>Στις λίστες εισαγωγής, διαχωριστικά μπορούν να είναι κόμματα, ελληνικά/λατινικά ερωτηματικά-άνω τελείες (;), αλλαγές γραμμής ή tab.",
+  "help.update_hint": "Αν η εφαρμογή στην αρχική οθόνη δεν ενημερώνεται σωστά:",
+  "help.reload": "🔄 Επαναφόρτωση εφαρμογής",
+
+  "footer.created": "RandomiseMe! – δημιουργός: Nico Siedler",
+  "footer.license": "Έκδοση 0.3a 02/2026 δημοσιεύτηκε υπό GPL3",
+
+  "confirm.clear": "Να καθαριστούν όλα τα ενεργά πρότζεκτ; («Ολοκληρωμένα» και ιστορικό θα παραμείνουν.)",
+  "confirm.clear_done": "Να καθαριστεί η λίστα «Ολοκληρωμένα»;",
+  "confirm.clear_history": "Να καθαριστεί το ιστορικό;",
+
+  "alert.no_projects": "Δεν έχουν προστεθεί ακόμη πρότζεκτ!",
+  "alert.import_finished": "Η εισαγωγή ολοκληρώθηκε: προστέθηκαν νέα πρότζεκτ — {count}.",
+  "alert.import_restored": "(+{count} επαναφέρθηκαν)",
+  "alert.nothing_to_copy": "Δεν υπάρχει κάτι για αντιγραφή ακόμη.",
+
+  "toast.copied": "Αντιγράφηκε στο πρόχειρο.",
+  "toast.deleted": "Διαγράφηκε: {name}",
+  "toast.done": "Σημειώθηκε ως ολοκληρωμένο: {name}",
+  "toast.restored": "Επαναφέρθηκε: {name}",
+  "toast.cleared_active": "Η ενεργή λίστα καθαρίστηκε.",
+  "toast.cleared_done": "Η λίστα «Ολοκληρωμένα» καθαρίστηκε.",
+  "toast.cleared_history": "Το ιστορικό καθαρίστηκε.",
+
+  "history.roll": "Επιλέχθηκε",
+  "history.done": "Ολοκληρώθηκε",
+  "history.restore": "Επαναφέρθηκε",
+  "history.delete": "Διαγράφηκε",
+
+  "aria.delete": "Διαγραφή",
+  "aria.done": "Σήμανση ως ολοκληρωμένο",
+  "aria.restore": "Επαναφορά",
+  "aria.copy": "Αντιγραφή",
+  "aria.undo": "Αναίρεση",
+
+  "exclamations": [
+    "Κοίτα:",
+    "Μπαμ:",
+    "Ορίστε:",
+    "Λοιπόν:",
+    "Μάντεψε:",
+    "Ανατροπή!",
+    "Σου έκατσε:",
+    "Πάμε:",
+    "Τα-νταμ:",
+    "Et voilà:"
+  ]
+},
+
+"nl": {
+  "lang.name": "🇳🇱 NL",
+  "lang.label": "Taal",
+  "flavour.text": "Hoi, hoe gaat het vandaag? <br> Laten we een project uitkiezen! :)",
+  "input.placeholder": "Voer de projectnaam in",
+  "btn.add": "Toevoegen",
+  "btn.import": "📂 Lijst importeren (txt of csv)",
+  "heading.list": "Mijn onafgemaakte projecten:",
+  "btn.clear": "🗑 Alles wissen",
+  "btn.roll": "🎲 Kom maar op!",
+
+  "heading.done": "Gedaan:",
+  "heading.history": "Geschiedenis:",
+  "btn.clear_done": "🧹 «Gedaan» wissen",
+  "btn.clear_history": "🗑 Geschiedenis wissen",
+  "btn.copy_history": "📋 Geschiedenis kopiëren",
+  "btn.mark_done": "✅ Markeren als gedaan",
+  "btn.copy": "📋 Kopiëren",
+  "btn.undo": "Ongedaan maken",
+
+  "help.btn": "❓ Hoe werkt het",
+  "help.title": "Zo gebruik je RandomiseMe",
+  "help.body": "1. Voeg projecten handmatig toe of importeer een .txt- of .csv-lijst.<br><br>2. Klik op « Kom maar op! » om willekeurig één project te kiezen.<br><br>3. « Alles wissen » leegt de lijst.<br><br>In importlijsten kunnen komma’s, puntkomma’s, regeleinden of tabs als scheidingsteken worden gebruikt.",
+  "help.update_hint": "Als de app op het startscherm niet goed wordt bijgewerkt:",
+  "help.reload": "🔄 App opnieuw laden",
+
+  "footer.created": "RandomiseMe! – gemaakt door: Nico Siedler",
+  "footer.license": "Versie 0.3a 02/2026 gepubliceerd onder GPL3",
+
+  "confirm.clear": "Alle actieve projecten wissen? («Gedaan» en geschiedenis blijven behouden.)",
+  "confirm.clear_done": "De lijst «Gedaan» wissen?",
+  "confirm.clear_history": "De geschiedenis wissen?",
+
+  "alert.no_projects": "Er zijn nog geen projecten toegevoegd!",
+  "alert.import_finished": "Import voltooid: nieuwe projecten toegevoegd — {count}.",
+  "alert.import_restored": "(+{count} hersteld)",
+  "alert.nothing_to_copy": "Er is nog niets om te kopiëren.",
+
+  "toast.copied": "Gekopieerd naar het klembord.",
+  "toast.deleted": "Verwijderd: {name}",
+  "toast.done": "Gemarkeerd als gedaan: {name}",
+  "toast.restored": "Hersteld: {name}",
+  "toast.cleared_active": "Actieve lijst gewist.",
+  "toast.cleared_done": "Lijst «Gedaan» gewist.",
+  "toast.cleared_history": "Geschiedenis gewist.",
+
+  "history.roll": "Gekozen",
+  "history.done": "Gedaan",
+  "history.restore": "Hersteld",
+  "history.delete": "Verwijderd",
+
+  "aria.delete": "Verwijderen",
+  "aria.done": "Markeren als gedaan",
+  "aria.restore": "Herstellen",
+  "aria.copy": "Kopiëren",
+  "aria.undo": "Ongedaan maken",
+
+  "exclamations": [
+    "Kijk:",
+    "Bam:",
+    "Hier:",
+    "Nou dan:",
+    "Raad eens:",
+    "Wat een wending:",
+    "Jij boft:",
+    "Kom op:",
+    "Ta-da:",
+    "Et voilà:"
+  ]
+},
+
+  "tr": {
+  "lang.name": "🇹🇷 TR",
+  "lang.label": "Dil",
+  "flavour.text": "Selam, bugün nasılsın? <br> Hadi bir proje seçelim! :)",
+  "input.placeholder": "Proje adını gir",
+  "btn.add": "Ekle",
+  "btn.import": "📂 Listeyi içe aktar (txt veya csv)",
+  "heading.list": "Bitmemiş projelerim:",
+  "btn.clear": "🗑 Hepsini temizle",
+  "btn.roll": "🎲 Haydi!",
+
+  "heading.done": "Tamamlananlar:",
+  "heading.history": "Geçmiş:",
+  "btn.clear_done": "🧹 «Tamamlananlar»ı temizle",
+  "btn.clear_history": "🗑 Geçmişi temizle",
+  "btn.copy_history": "📋 Geçmişi kopyala",
+  "btn.mark_done": "✅ Tamamlandı olarak işaretle",
+  "btn.copy": "📋 Kopyala",
+  "btn.undo": "Geri al",
+
+  "help.btn": "❓ Nasıl kullanılır",
+  "help.title": "RandomiseMe nasıl kullanılır",
+  "help.body": "1. Projeleri elle ekle ya da .txt veya .csv listesini içe aktar.<br><br>2. Rastgele bir proje seçmek için « Haydi! » düğmesine bas.<br><br>3. « Hepsini temizle » listeyi sıfırlar.<br><br>İçe aktarılan listelerde ayraç olarak virgül, noktalı virgül, satır sonu veya sekme kullanılabilir.",
+  "help.update_hint": "Ana ekrandaki uygulama doğru şekilde güncellenmiyorsa:",
+  "help.reload": "🔄 Uygulamayı yeniden yükle",
+
+  "footer.created": "RandomiseMe! – yapan: Nico Siedler",
+  "footer.license": "Sürüm 0.3a 02/2026 GPL3 ile yayımlandı",
+
+  "confirm.clear": "Tüm aktif projeler temizlensin mi? («Tamamlananlar» ve geçmiş kalacak.)",
+  "confirm.clear_done": "«Tamamlananlar» listesi temizlensin mi?",
+  "confirm.clear_history": "Geçmiş temizlensin mi?",
+
+  "alert.no_projects": "Henüz proje eklenmedi!",
+  "alert.import_finished": "İçe aktarma tamamlandı: yeni eklenen proje sayısı — {count}.",
+  "alert.import_restored": "(+{count} geri yüklendi)",
+  "alert.nothing_to_copy": "Henüz kopyalanacak bir şey yok.",
+
+  "toast.copied": "Panoya kopyalandı.",
+  "toast.deleted": "Silindi: {name}",
+  "toast.done": "Tamamlandı olarak işaretlendi: {name}",
+  "toast.restored": "Geri yüklendi: {name}",
+  "toast.cleared_active": "Aktif liste temizlendi.",
+  "toast.cleared_done": "«Tamamlananlar» listesi temizlendi.",
+  "toast.cleared_history": "Geçmiş temizlendi.",
+
+  "history.roll": "Seçildi",
+  "history.done": "Tamamlandı",
+  "history.restore": "Geri yüklendi",
+  "history.delete": "Silindi",
+
+  "aria.delete": "Sil",
+  "aria.done": "Tamamlandı olarak işaretle",
+  "aria.restore": "Geri yükle",
+  "aria.copy": "Kopyala",
+  "aria.undo": "Geri al",
+
+  "exclamations": [
+    "Bak:",
+    "Bam:",
+    "Al bakalım:",
+    "Pekâlâ:",
+    "Tahmin et:",
+    "Ne ters köşe:",
+    "Şanslısın:",
+    "Haydi:",
+    "Ta-daa:",
+    "Et voilà:"
+  ]
+}
+    
 };
 
   const FALLBACK_LANG = "en";
