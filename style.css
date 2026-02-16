@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 20px;
   text-align: center;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 html, body {
@@ -242,48 +242,23 @@ li {
 
 
 
-/* ========== HOWTO LIST ========== */
 
-.howto-steps {
-  margin: 12px 0 10px;
-  padding-left: 18px;
-  line-height: 1.5;
-}
+/* ========== LANGUAGE SELECT ========== */
 
-.howto-steps li {
-  margin: 8px 0;
-}
-
-.privacy-note {
-  font-size: 13px;
-  opacity: 0.8;
-  margin-top: 12px;
-}
-
-/* ========== LANGUAGE SELECTOR ========== */
-
-.lang-bar {
-  margin-bottom: 10px;
+.lang-select{
+  margin: 10px auto 0;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  opacity: 0.85;
+  opacity: 0.8;
+  font-size: 14px;
 }
 
-.lang-label {
-  font-size: 12px;
-}
-
-.lang-select {
+.lang-select select{
+  background: #111;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
   padding: 6px 10px;
-  border-radius: 10px;
-  border: 1px solid #555;
-  background-color: #111;
-  color: white;
-}
-
-.lang-select:focus {
-  outline: none;
-  border-color: #00b3a4;
 }

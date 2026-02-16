@@ -1,27 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // i18n init
-  if (window.i18n && typeof window.i18n.init === "function") {
-    window.i18n.init();
-  }
-  const t = (window.i18n && window.i18n.t) ? window.i18n.t : (k => k);
-
-  // language selector
-  const langSelect = document.getElementById("langSelect");
-  if (langSelect && window.i18n && typeof window.i18n.setLang === "function") {
-    langSelect.value = window.i18n.getLang();
-    langSelect.addEventListener("change", (e) => {
-      window.i18n.setLang(e.target.value);
-    });
-  }
-
-  // storage
+  // import projects from txt or csv
   let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
+  // save project
   function saveProjects() {
     localStorage.setItem("projects", JSON.stringify(projects));
   }
 
+  // add project
   function addProject() {
     const input = document.getElementById("projectInput");
     const name = input.value.trim();
@@ -38,14 +25,16 @@ document.addEventListener("DOMContentLoaded", function () {
     input.focus();
   }
 
-  window.deleteProject = function (index) {
+  // delete project
+  window.deleteProject = function(index) {
     projects.splice(index, 1);
     saveProjects();
     renderProjects();
   };
 
-  window.clearAll = function () {
-    const confirmDelete = confirm(t("confirmClearAll"));
+  // delete entire list
+  window.clearAll = function() {
+    const confirmDelete = confirm(window.i18n ? window.i18n.t("confirm.clear") : "Do you really want to clear the list?");
     if (!confirmDelete) return;
 
     projects = [];
@@ -54,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("result").innerHTML = "";
   };
 
+  // show list
   function renderProjects() {
     const list = document.getElementById("projectList");
     list.innerHTML = "";
@@ -61,17 +51,17 @@ document.addEventListener("DOMContentLoaded", function () {
     projects.forEach((project, index) => {
       const li = document.createElement("li");
       li.innerHTML = `
-        ${escapeHtml(project)}
-        <button onclick="deleteProject(${index})" aria-label="Delete">❌</button>
+        ${project}
+        <button onclick="deleteProject(${index})">❌</button>
       `;
       list.appendChild(li);
     });
   }
 
   // randomiser
-  window.roll = function () {
+  window.roll = function() {
     if (projects.length === 0) {
-      alert(t("alertNoProjects"));
+      alert(window.i18n ? window.i18n.t("alert.no_projects") : "No projects added yet!");
       return;
     }
 
@@ -91,10 +81,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const finalIndex = Math.floor(Math.random() * projects.length);
 
-      let exclamations = t("exclamations");
-      if (!Array.isArray(exclamations) || exclamations.length === 0) {
-        exclamations = ["Et voilà:"]; // safe fallback
-      }
+      const exclamations = (window.i18n ? window.i18n.t("exclamations") : [
+        "Oh look:",
+        "Bäm:",
+        "Take that:",
+        "Well:",
+        "Guess what:",
+        "Plot twist:",
+        "Lucky you:",
+        "Here we go:",
+        "Ta-da:",
+        "Et voilà:"
+      ]);
 
       const randomExclamation =
         exclamations[Math.floor(Math.random() * exclamations.length)];
@@ -103,10 +101,11 @@ document.addEventListener("DOMContentLoaded", function () {
       resultDiv.classList.remove("winner-glow");
       void resultDiv.offsetWidth;
 
+      // Only project name orange
       resultDiv.innerHTML =
-        escapeHtml(String(randomExclamation)) +
+        randomExclamation +
         " <span class='result-highlight'>" +
-        escapeHtml(projects[finalIndex]) +
+        projects[finalIndex] +
         "</span>";
 
       resultDiv.classList.add("winner-glow");
@@ -114,44 +113,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 2000);
   };
 
-  // export list
-  const exportBtn = document.getElementById("exportBtn");
-  if (exportBtn) {
-    exportBtn.addEventListener("click", () => {
-      if (!projects.length) {
-        alert(t("alertExportEmpty"));
-        return;
-      }
-      const content = projects.join("\n");
-      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "randomiseme-projects.txt";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-      // optional feedback
-      // alert(t("alertExportDone"));
-    });
-  }
+  const reloadBtn = document.getElementById("reloadBtn");
+
+if (reloadBtn) {
+  reloadBtn.addEventListener("click", function() {
+    const url = window.location.pathname + "?v=" + Date.now();
+    window.location.href = url;
+  });
+}
+
 
   // import data
-  document.getElementById("fileInput").addEventListener("change", function (event) {
+  document.getElementById("fileInput").addEventListener("change", function(event) {
     const file = event.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = function (e) {
+    reader.onload = function(e) {
 
       const content = e.target.result;
-      const entries = String(content).split(/[\r\n,;\t]+/);
+      const entries = content.split(/[\r\n,;\t]+/);
 
       let added = 0;
 
       entries.forEach(entry => {
-        let trimmed = String(entry).trim();
+        let trimmed = entry.trim();
         trimmed = trimmed.replace(/^"(.*)"$/, '$1');
 
         if (
@@ -166,14 +152,14 @@ document.addEventListener("DOMContentLoaded", function () {
       saveProjects();
       renderProjects();
 
-      alert(t("alertImportFinished", { count: added }));
+      alert(window.i18n ? window.i18n.t("alert.import_finished", {count: added}) : `Import finished: ${added} new projects added.`);
     };
 
     reader.readAsText(file);
   });
 
   // activate add on enter
-  document.getElementById("projectForm").addEventListener("submit", function (event) {
+  document.getElementById("projectForm").addEventListener("submit", function(event) {
     event.preventDefault();
     addProject();
   });
@@ -184,61 +170,28 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeBtn = document.querySelector(".close-btn");
 
   if (helpBtn && modal && closeBtn) {
-    helpBtn.addEventListener("click", function () {
+    helpBtn.addEventListener("click", function() {
       modal.style.display = "block";
     });
 
-    closeBtn.addEventListener("click", function () {
+    closeBtn.addEventListener("click", function() {
       modal.style.display = "none";
     });
 
-    window.addEventListener("click", function (event) {
+    window.addEventListener("click", function(event) {
       if (event.target === modal) {
         modal.style.display = "none";
       }
     });
 
-    document.addEventListener("keydown", function (event) {
+    document.addEventListener("keydown", function(event) {
       if (event.key === "Escape") {
         modal.style.display = "none";
       }
     });
   }
 
-  // Service Worker (PWA) + reload helper
-  let swReg = null;
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js").then((reg) => {
-      swReg = reg;
-    }).catch(() => {
-      // ignore
-    });
-  }
-
-  const reloadBtn = document.getElementById("reloadBtn");
-  if (reloadBtn) {
-    reloadBtn.addEventListener("click", function () {
-      // Prefer SW update flow
-      if (swReg && swReg.waiting) {
-        swReg.waiting.postMessage({ type: "SKIP_WAITING" });
-      }
-
-      // cache-bust reload as fallback
-      const base = window.location.href.split("?")[0].split("#")[0];
-      window.location.href = base + "?v=" + Date.now();
-    });
-  }
-
   // initial render
   renderProjects();
-
-  // helpers
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/\"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
 });
+
