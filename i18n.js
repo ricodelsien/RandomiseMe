@@ -911,7 +911,7 @@
 
     "exclamations": [
       "Katso:",
-      "Bam:",
+      "Satana...:",
       "Ole hyvä:",
       "No niin:",
       "Arvaa:",
@@ -919,7 +919,7 @@
       "Onnekas sinä:",
       "Mennään:",
       "Ta‑da:",
-      "Et voilà:"
+      "Perkele...:"
     ]
   },
 
