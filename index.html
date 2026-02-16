@@ -2,23 +2,22 @@
 <!-- Cause: shuffle-pick large numbers of projects -->
 <!-- Author: Nico Siedler (git: ricodelsien) -->
 <!-- Date: 2026-02-16 -->
-<!-- Version: 0.5a -->
+<!-- Version: 0.7a -->
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
 
   <title>RandomiseMe!</title>
 
-  <!-- iOS Homescreen icon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="icon.png"/>
-  <link rel="icon" type="image/png" sizes="512x512" href="icon.png"/>
+  <!-- iOS / Android icons -->
+  <link id="appleTouchIcon" rel="apple-touch-icon" sizes="180x180" href="icon.png"/>
+  <link id="appIcon" rel="icon" type="image/png" sizes="512x512" href="icon.png"/>
 
   <!-- PWA -->
-  <link rel="manifest" href="manifest.json"/>
-  <meta name="theme-color" content="#000000"/>
+  <link id="manifestLink" rel="manifest" href="manifest.json"/>
+  <meta id="themeColorMeta" name="theme-color" content="#000000"/>
 
   <!-- iOS Web App Mode -->
   <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -29,112 +28,117 @@
 </head>
 
 <body>
-  <div class="header">
-    <img src="Randomise.png" alt="Randomise Me"/>
-  </div>
+  <main class="app" role="application" aria-label="RandomiseMe">
+    <header class="header">
+      <img src="logo/Randomise.png" alt="RandomiseMe"/>
+      <p class="flavour-text" data-i18n-html="flavour.text">Hi, how are you today? <br/> Let’s pick a new project! :)</p>
+    </header>
 
-  <div class="flavour-text">
-    <p data-i18n-html="flavour.text">Still drowning in projects?<br/>Time to tell them: Alea iacta est!</p>
-  </div>
+    <section class="controls" aria-label="Controls">
+      <form id="projectForm" class="project-form" autocomplete="off">
+        <input
+          id="projectInput"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          data-i18n-placeholder="input.placeholder"
+          placeholder="Enter project name"
+          aria-label="Project name"
+        />
+        <button type="submit" class="btn-success iconish" data-icon="➕" data-i18n="btn.add" data-i18n-aria="btn.add">Add project</button>
+      </form>
 
-  <div class="input-section">
-    <form id="projectForm">
-      <input id="projectInput" type="text" autocomplete="off" data-i18n-placeholder="input.placeholder" placeholder="Enter project name"/>
-      <button type="submit" data-i18n="btn.add">Add project</button>
-    </form>
-  </div>
-
-  <!-- Import Button -->
-  <div class="import-section">
-    <label class="custom-file-button" for="fileInput" data-i18n="btn.import">📂 Import list (txt or csv)</label>
-    <input id="fileInput" type="file" accept=".txt,.csv" hidden/>
-  </div>
-
-  <h3>__________</h3>
-
-  <h4 data-i18n="heading.list">My UFOs:</h4>
-  <ul id="projectList"></ul>
-
-  <!-- clear and roll buttons -->
-  <div class="button-group">
-    <button id="clearBtn" data-i18n="btn.clear">🗑 Clear all UFOs</button>
-    <button id="randomBtn" data-i18n="btn.roll">🎲 Let's roll!</button>
-  </div>
-
-  <div id="result"></div>
-  <div id="resultActions" class="result-actions" hidden>
-    <button id="markPickedDoneBtn" data-i18n="btn.mark_done">✅ Mark as done</button>
-    <button id="copyPickedBtn" data-i18n="btn.copy">📋 Copy</button>
-  </div>
-
-  <!-- Done & History -->
-  <div class="panels">
-    <details id="donePanel" class="panel">
-      <summary><span data-i18n="heading.done">Done:</span> <span class="panel-count" id="doneCount">0</span></summary>
-      <div class="panel-actions">
-        <button id="clearDoneBtn" data-i18n="btn.clear_done">🧹 Clear done</button>
+      <div class="import-section">
+        <label class="custom-file-button btn-info iconish" data-icon="📂" for="fileInput" data-i18n="btn.import" data-i18n-aria="btn.import">📂 Import list (txt or csv)</label>
+        <input id="fileInput" type="file" accept=".txt,.csv" hidden/>
       </div>
-      <ul id="doneList"></ul>
-    </details>
 
-    <details id="historyPanel" class="panel">
-      <summary><span data-i18n="heading.history">History:</span> <span class="panel-count" id="historyCount">0</span></summary>
-      <div class="panel-actions">
-        <button id="copyHistoryBtn" data-i18n="btn.copy_history">📋 Copy history</button>
-        <button id="clearHistoryBtn" data-i18n="btn.clear_history">🗑 Clear history</button>
+      <div class="button-group">
+        <button id="clearBtn" class="btn-danger iconish" data-icon="🗑" data-i18n="btn.clear" data-i18n-aria="btn.clear">🗑 Clear all UFOs</button>
+        <button id="randomBtn" class="btn-accent iconish" data-icon="🎲" data-i18n="btn.roll" data-i18n-aria="btn.roll">🎲 Let's roll!</button>
       </div>
-      <ul id="historyList"></ul>
-    </details>
-  </div>
 
-  <!-- Help Button -->
-  <button id="helpBtn" class="help-button" data-i18n="help.btn">❓ HowTo</button>
+      <div id="result" aria-live="polite"></div>
+
+      <div id="resultActions" class="result-actions" hidden>
+        <button id="markPickedDoneBtn" class="btn-success iconish" data-icon="✅" data-i18n="btn.mark_done" data-i18n-aria="btn.mark_done">✅ Mark as done</button>
+        <button id="copyPickedBtn" class="btn-neutral iconish" data-icon="📋" data-i18n="btn.copy" data-i18n-aria="btn.copy">📋 Copy</button>
+      </div>
+    </section>
+
+    <section class="scroll-area" aria-label="Lists">
+      <h4 class="list-title" data-i18n="heading.list">My UFOs:</h4>
+      <ul id="projectList"></ul>
+
+      <div class="panels">
+        <details id="donePanel" class="panel">
+          <summary><span data-i18n="heading.done">Done:</span> <span class="panel-count" id="doneCount">0</span></summary>
+          <div class="panel-actions">
+            <button id="clearDoneBtn" class="btn-danger iconish" data-icon="🧹" data-i18n="btn.clear_done" data-i18n-aria="btn.clear_done">🧹 Clear done</button>
+          </div>
+          <ul id="doneList"></ul>
+        </details>
+
+        <details id="historyPanel" class="panel">
+          <summary><span data-i18n="heading.history">History:</span> <span class="panel-count" id="historyCount">0</span></summary>
+          <div class="panel-actions">
+            <button id="copyHistoryBtn" class="btn-neutral iconish" data-icon="📋" data-i18n="btn.copy_history" data-i18n-aria="btn.copy_history">📋 Copy history</button>
+            <button id="clearHistoryBtn" class="btn-danger iconish" data-icon="🗑" data-i18n="btn.clear_history" data-i18n-aria="btn.clear_history">🗑 Clear history</button>
+          </div>
+          <ul id="historyList"></ul>
+        </details>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-row">
+        <div class="lang-select">
+          <label for="langSelect" data-i18n="lang.label">Language</label>
+          <select id="langSelect" data-i18n-aria="lang.label" aria-label="Language"></select>
+        </div>
+
+        <button id="helpBtn" class="help-button btn-info iconish" data-icon="❓" data-i18n="help.btn" data-i18n-aria="help.btn">❓ HowTo</button>
+      </div>
+
+      <p class="footer-text">
+        <span data-i18n="footer.created">RandomiseMe! – created by Nico Siedler</span><br/>
+        <span data-i18n="footer.license">Version 0.7a 02/2026 published under GPL3</span>
+        <span id="buildDate"></span>
+      </p>
+    </footer>
+  </main>
 
   <!-- Help Modal -->
-  <div id="helpModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn">×</span>
+  <div id="helpModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-label="Help">
+      <button class="close-btn" aria-label="Close">×</button>
       <h3 data-i18n="help.title">How to use RandomiseMe</h3>
       <p data-i18n-html="help.body">1. Add projects manually or import a .txt or .csv list.<br/><br/>2. Click "Let's roll!" to randomly select a single project.<br/><br/>3. Use "Clear all UFOs" to reset your list.<br/><br/>Imported lists can be separated by commas, semicolons, line breaks or tabs.</p>
-      <hr style="margin:20px 0; opacity:0.3;"/>
+
+      <hr class="modal-sep"/>
+
       <p class="help-hint" data-i18n="help.update_hint">If the Home Screen app does not update properly:</p>
-      <button id="reloadBtn" class="reload-button" data-i18n="help.reload">🔄 Reload app</button>
+      <button id="reloadBtn" class="reload-button btn-info iconish" data-icon="🔄" data-i18n="help.reload" data-i18n-aria="help.reload">🔄 Reload app</button>
+
+      <hr class="modal-sep"/>
+
+      <p class="help-hint" data-i18n="iconpicker.title">App icon color (for installation)</p>
+      <div class="icon-picker" role="group" aria-label="Icon color">
+        <button class="icon-chip" data-icon-variant="default" title="Default" aria-label="Default"></button>
+        <button class="icon-chip" data-icon-variant="blue" title="Blue" aria-label="Blue"></button>
+        <button class="icon-chip" data-icon-variant="green" title="Green" aria-label="Green"></button>
+        <button class="icon-chip" data-icon-variant="orange" title="Orange" aria-label="Orange"></button>
+        <button class="icon-chip" data-icon-variant="pink" title="Pink" aria-label="Pink"></button>
+        <button class="icon-chip" data-icon-variant="violet" title="Violet" aria-label="Violet"></button>
+        <button class="icon-chip" data-icon-variant="yellow" title="Yellow" aria-label="Yellow"></button>
+      </div>
+      <p class="help-note" data-i18n="iconpicker.note">After changing, add to Home Screen / install again.</p>
+
     </div>
   </div>
 
   <!-- Toast / Undo -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-  <footer class="app-info">
-    <div class="lang-select">
-      <label for="langSelect" data-i18n="lang.label">Language</label>
-<select id="langSelect" data-i18n-aria="lang.label">
-  <option value="da">🇩🇰 DA</option>
-  <option value="de">🇩🇪 DE</option>
-  <option value="el">🇬🇷 EL</option>
-  <option value="en">🇬🇧 EN</option>
-  <option value="es">🇪🇸 ES</option>
-  <option value="fi">🇫🇮 FI</option>
-  <option value="fr">🇫🇷 FR</option>
-  <option value="it">🇮🇹 IT</option>
-  <option value="nb">🇳🇴 NB</option>
-  <option value="nl">🇳🇱 NL</option>
-  <option value="pl">🇵🇱 PL</option>
-  <option value="pt">🇵🇹 PT</option>
-  <option value="ru">🇷🇺 RU</option>
-  <option value="sv">🇸🇪 SV</option>
-  <option value="tr">🇹🇷 TR</option>
-  <option value="uk">🇺🇦 UK</option>
-</select>
-
-    </div>
-
-    <p>
-      <span data-i18n="footer.created">RandomiseMe! – created by Nico Siedler</span><br/>
-      <span data-i18n="footer.license">Version 0.5a 02/2026 published under GPL3</span>
-      <span id="buildDate"></span>
-    </p>
-  </footer>
 
   <script src="i18n.js"></script>
   <script src="script.js"></script>

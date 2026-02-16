@@ -1,5 +1,5 @@
 /* RandomiseMe! Service Worker */
-const CACHE_VERSION = 'randomiseme-v0.5a-2026-02-16';
+const CACHE_VERSION = 'randomiseme-v0.7a-2026-02-16';
 const ASSETS = [
   './',
   './index.html',
@@ -7,9 +7,27 @@ const ASSETS = [
   './script.js',
   './i18n.js',
   './manifest.json',
+  './manifest-blue.json',
+  './manifest-green.json',
+  './manifest-orange.json',
+  './manifest-pink.json',
+  './manifest-violet.json',
+  './manifest-yellow.json',
   './icon.png',
   './icon-192.png',
-  './Randomise.png',
+  './icon/icon_blue.png',
+  './icon/icon_green.png',
+  './icon/icon_orange.png',
+  './icon/icon_pink.png',
+  './icon/icon_violet.png',
+  './icon/icon_yellow.png',
+  './icon/icon_blue-192.png',
+  './icon/icon_green-192.png',
+  './icon/icon_orange-192.png',
+  './icon/icon_pink-192.png',
+  './icon/icon_violet-192.png',
+  './icon/icon_yellow-192.png',
+  './logo/Randomise.png',
   './RandomiseMe.png'
 ];
 

@@ -2,6 +2,65 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
+  // Mobile: reduce accidental zoom gestures
+  document.addEventListener("gesturestart", (e) => e.preventDefault());
+  document.addEventListener("dblclick", (e) => e.preventDefault());
+
+  // App icon variant (useful BEFORE installing / adding to Home Screen)
+  const ICON_VARIANTS = {
+    default: { manifest: "manifest.json", icon: "icon.png" },
+    blue:    { manifest: "manifest-blue.json", icon: "icon/icon_blue.png" },
+    green:   { manifest: "manifest-green.json", icon: "icon/icon_green.png" },
+    orange:  { manifest: "manifest-orange.json", icon: "icon/icon_orange.png" },
+    pink:    { manifest: "manifest-pink.json", icon: "icon/icon_pink.png" },
+    violet:  { manifest: "manifest-violet.json", icon: "icon/icon_violet.png" },
+    yellow:  { manifest: "manifest-yellow.json", icon: "icon/icon_yellow.png" },
+  };
+
+  function getInitialIconVariant() {
+    try {
+      const url = new URL(window.location.href);
+      const fromQuery = url.searchParams.get("icon");
+      if (fromQuery && ICON_VARIANTS[fromQuery]) return fromQuery;
+
+      const stored = localStorage.getItem("iconVariant");
+      if (stored && ICON_VARIANTS[stored]) return stored;
+    } catch {}
+    return "default";
+  }
+
+  function applyIconVariant(variant, { persist = true } = {}) {
+    const v = ICON_VARIANTS[variant] ? variant : "default";
+
+    const manifestLink = document.getElementById("manifestLink");
+    if (manifestLink) manifestLink.setAttribute("href", ICON_VARIANTS[v].manifest);
+
+    const appleIcon = document.getElementById("appleTouchIcon");
+    if (appleIcon) appleIcon.setAttribute("href", ICON_VARIANTS[v].icon);
+
+    const appIcon = document.getElementById("appIcon");
+    if (appIcon) appIcon.setAttribute("href", ICON_VARIANTS[v].icon);
+
+    // reflect in URL (so the install prompt uses the chosen variant)
+    try {
+      const url = new URL(window.location.href);
+      if (v === "default") url.searchParams.delete("icon");
+      else url.searchParams.set("icon", v);
+      history.replaceState(null, "", url.toString());
+    } catch {}
+
+    if (persist) {
+      try { localStorage.setItem("iconVariant", v); } catch {}
+    }
+
+    // highlight selection in modal
+    document.querySelectorAll(".icon-chip").forEach((b) => {
+      b.classList.toggle("is-selected", b.dataset.iconVariant === v);
+    });
+  }
+
+  applyIconVariant(getInitialIconVariant(), { persist: false });
+
   const STORAGE_KEYS = {
     projects: "projects",
     done: "doneProjects",
@@ -10,11 +69,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const MAX_HISTORY = 50;
 
+  // Cache DOM nodes (avoids repeated lookups)
+  const DOM = {
+    projectList: document.getElementById("projectList"),
+    doneList: document.getElementById("doneList"),
+    historyList: document.getElementById("historyList"),
+    doneCount: document.getElementById("doneCount"),
+    historyCount: document.getElementById("historyCount"),
+    result: document.getElementById("result"),
+    resultActions: document.getElementById("resultActions"),
+    randomBtn: document.getElementById("randomBtn"),
+    langSelect: document.getElementById("langSelect"),
+  };
+
   // ---------- state ----------
 
   let projects = loadArray(STORAGE_KEYS.projects);
   let doneProjects = loadArray(STORAGE_KEYS.done);
   let history = loadArray(STORAGE_KEYS.history);
+
+  // Fast membership checks (case-insensitive)
+  let projectsSet = new Set(projects.map(p => String(p).toLowerCase()));
+  let doneSet = new Set(doneProjects.map(x => (x && x.name ? String(x.name).toLowerCase() : "")));
 
   // Keep a single undo action (simple + predictable)
   let lastUndo = null;
@@ -23,49 +99,59 @@ document.addEventListener("DOMContentLoaded", function () {
   // Last picked project name (for result action buttons)
   let lastPicked = null;
 
-    // ---------- language select ordering ----------
+  // ---------- language select (English alphabetical order) ----------
 
-  const PREFERRED_LANG_ORDER = [
-    "de","en","fr","it",
-    "es","nl","pl","pt",
-    "sv","da","nb","fi",
-    "cs","el","tr","uk","ru"
-  ];
+  const LANG_META = {
+    cs: { native: "Čeština", english: "Czech", flag: "🇨🇿" },
+    da: { native: "Dansk", english: "Danish", flag: "🇩🇰" },
+    de: { native: "Deutsch", english: "German", flag: "🇩🇪" },
+    el: { native: "Ελληνικά", english: "Greek", flag: "🇬🇷" },
+    en: { native: "English", english: "English", flag: "🇬🇧" },
+    es: { native: "Español", english: "Spanish", flag: "🇪🇸" },
+    fi: { native: "Suomi", english: "Finnish", flag: "🇫🇮" },
+    fr: { native: "Français", english: "French", flag: "🇫🇷" },
+    it: { native: "Italiano", english: "Italian", flag: "🇮🇹" },
+    nb: { native: "Norsk bokmål", english: "Norwegian", flag: "🇳🇴" },
+    nl: { native: "Nederlands", english: "Dutch", flag: "🇳🇱" },
+    pl: { native: "Polski", english: "Polish", flag: "🇵🇱" },
+    pt: { native: "Português", english: "Portuguese", flag: "🇵🇹" },
+    ru: { native: "Русский", english: "Russian", flag: "🇷🇺" },
+    sv: { native: "Svenska", english: "Swedish", flag: "🇸🇪" },
+    tr: { native: "Türkçe", english: "Turkish", flag: "🇹🇷" },
+    uk: { native: "Українська", english: "Ukrainian", flag: "🇺🇦" }
+  };
 
-  function buildLanguageSelectOrdered() {
-    const selectEl = document.getElementById("langSelect"); // <- falls deine ID anders ist: hier anpassen
-    if (!selectEl) return;
+  function buildLanguageSelectEnglishAlphabetical() {
+    const selectEl = DOM.langSelect;
+    if (!selectEl || !window.i18n) return;
 
-    // translations container: either window.I18N or window.i18n.dict (depending on your setup)
-    const dict =
-      (window.I18N && typeof window.I18N === "object" && window.I18N) ||
-      (window.i18n && window.i18n.dict && typeof window.i18n.dict === "object" && window.i18n.dict) ||
-      null;
+    const available =
+      (typeof window.i18n.available === "function") ? window.i18n.available() : [];
 
-    if (!dict) return;
+    const known = available
+      .filter((code) => LANG_META[code])
+      .map((code) => ({ code, ...LANG_META[code] }))
+      .sort((a, b) => a.english.localeCompare(b.english, undefined, { sensitivity: "base" }));
 
-    const all = Object.keys(dict).filter(code => dict[code] && dict[code]["lang.name"]);
+    const unknown = available
+      .filter((code) => !LANG_META[code])
+      .map((code) => ({ code, name: code.toUpperCase(), flag: "🏳️" }))
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" }));
 
-    const inPreferred = PREFERRED_LANG_ORDER.filter(code => all.includes(code));
-    const rest = all
-      .filter(code => !PREFERRED_LANG_ORDER.includes(code))
-      .sort((a, b) =>
-        String(dict[a]["lang.name"]).localeCompare(String(dict[b]["lang.name"]), undefined, { sensitivity: "base" })
-      );
-
-    const ordered = [...inPreferred, ...rest];
-
-    // rebuild options
     selectEl.innerHTML = "";
-    for (const code of ordered) {
+    for (const it of [...known, ...unknown]) {
       const opt = document.createElement("option");
-      opt.value = code;
-      opt.textContent = dict[code]["lang.name"]; // e.g. 🇩🇪 DE
+      opt.value = it.code;
+      opt.textContent = `${it.flag} ${it.native}`;
       selectEl.appendChild(opt);
     }
+
+    const current = (typeof window.i18n.getLang === "function") ? window.i18n.getLang() : "en";
+    selectEl.value = current;
   }
 
   // ---------- helpers ----------
+
 
   function loadArray(key) {
     try {
@@ -81,6 +167,53 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem(STORAGE_KEYS.projects, JSON.stringify(projects));
     localStorage.setItem(STORAGE_KEYS.done, JSON.stringify(doneProjects));
     localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(history));
+  }
+
+  // Defer storage writes so UI updates feel instant on mobile.
+  let saveQueued = false;
+  function scheduleSave() {
+    if (saveQueued) return;
+    saveQueued = true;
+
+    const run = () => {
+      saveQueued = false;
+      saveAll();
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(run, { timeout: 600 });
+    } else {
+      setTimeout(run, 0);
+    }
+  }
+
+  function flushSaveNow() {
+    if (!saveQueued) return;
+    saveQueued = false;
+    saveAll();
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) flushSaveNow();
+  });
+
+  window.addEventListener("beforeunload", () => {
+    flushSaveNow();
+  });
+
+  function rebuildSets() {
+    projectsSet = new Set(projects.map(p => String(p).toLowerCase()));
+    doneSet = new Set(doneProjects.map(x => (x && x.name ? String(x.name).toLowerCase() : "")));
+  }
+
+  function escapeHTML(str) {
+    const s = String(str ?? "");
+    return s
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
   }
 
   function normalizeName(name) {
@@ -114,8 +247,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function pushHistory(type, name) {
     history.unshift({ type, name, at: new Date().toISOString() });
     if (history.length > MAX_HISTORY) history = history.slice(0, MAX_HISTORY);
-    saveAll();
-    renderHistory();
+    scheduleSave();
+    scheduleRender("history");
   }
 
   async function copyToClipboard(text) {
@@ -243,10 +376,11 @@ document.addEventListener("DOMContentLoaded", function () {
       history = a.snapshot;
     }
 
-    saveAll();
-    renderProjects();
-    renderDone();
-    renderHistory();
+    rebuildSets();
+    scheduleSave();
+    scheduleRender("projects");
+    scheduleRender("done");
+    scheduleRender("history");
   }
 
   // ---------- core actions ----------
@@ -254,27 +388,33 @@ document.addEventListener("DOMContentLoaded", function () {
   function addProject(nameRaw) {
     const name = normalizeName(nameRaw);
     if (!name) return;
+    const key = name.toLowerCase();
 
     // If it exists in Done, restore it instead of duplicating
-    const doneIdx = findIndexCaseInsensitive(doneProjects, name);
-    if (doneIdx !== -1) {
-      const item = doneProjects.splice(doneIdx, 1)[0];
-      if (!projects.some(p => p.toLowerCase() === name.toLowerCase())) {
-        projects.push(item.name);
+    if (doneSet.has(key)) {
+      const doneIdx = findIndexCaseInsensitive(doneProjects, name);
+      if (doneIdx !== -1) {
+        const item = doneProjects.splice(doneIdx, 1)[0];
+        doneSet.delete(key);
+        if (!projectsSet.has(key)) {
+          projects.push(item.name);
+          projectsSet.add(key);
+        }
+        scheduleSave();
+        scheduleRender("projects");
+        scheduleRender("done");
+        pushHistory("restore", item.name);
+        showToast(t("toast.restored", { name: item.name }));
+        return;
       }
-      saveAll();
-      renderProjects();
-      renderDone();
-      pushHistory("restore", item.name);
-      showToast(t("toast.restored", { name: item.name }));
-      return;
     }
 
     // Avoid duplicates in active list
-    if (!projects.some(p => p.toLowerCase() === name.toLowerCase())) {
+    if (!projectsSet.has(key)) {
       projects.push(name);
-      saveAll();
-      renderProjects();
+      projectsSet.add(key);
+      scheduleSave();
+      scheduleRender("projects");
     }
   }
 
@@ -282,9 +422,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const name = projects[index];
     if (!name) return;
 
+    projectsSet.delete(String(name).toLowerCase());
+
     projects.splice(index, 1);
-    saveAll();
-    renderProjects();
+    scheduleSave();
+    scheduleRender("projects");
 
     setUndo({ type: "deleteActive", name, index });
     pushHistory("delete", name);
@@ -295,13 +437,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const name = projects[index];
     if (!name) return;
 
+    const key = String(name).toLowerCase();
+    projectsSet.delete(key);
+
     projects.splice(index, 1);
     const item = { name, doneAt: new Date().toISOString() };
     doneProjects.unshift(item);
+    doneSet.add(key);
 
-    saveAll();
-    renderProjects();
-    renderDone();
+    scheduleSave();
+    scheduleRender("projects");
+    scheduleRender("done");
 
     setUndo({ type: "markDone", name, fromIndex: index });
     pushHistory("done", name);
@@ -318,15 +464,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const item = doneProjects[index];
     if (!item || !item.name) return;
 
+    const key = String(item.name).toLowerCase();
+    doneSet.delete(key);
+
     doneProjects.splice(index, 1);
 
-    if (!projects.some(p => p.toLowerCase() === item.name.toLowerCase())) {
+    if (!projectsSet.has(key)) {
       projects.push(item.name);
+      projectsSet.add(key);
     }
 
-    saveAll();
-    renderProjects();
-    renderDone();
+    scheduleSave();
+    scheduleRender("projects");
+    scheduleRender("done");
 
     setUndo({ type: "restoreFromDone", name: item.name, fromIndex: index, item });
     pushHistory("restore", item.name);
@@ -337,9 +487,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const item = doneProjects[index];
     if (!item || !item.name) return;
 
+    doneSet.delete(String(item.name).toLowerCase());
+
     doneProjects.splice(index, 1);
-    saveAll();
-    renderDone();
+    scheduleSave();
+    scheduleRender("done");
 
     setUndo({ type: "deleteDone", index, item });
     pushHistory("delete", item.name);
@@ -352,12 +504,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const snapshot = [...projects];
     projects = [];
+    projectsSet.clear();
 
-    saveAll();
-    renderProjects();
+    scheduleSave();
+    scheduleRender("projects");
 
-    const resultDiv = document.getElementById("result");
-    if (resultDiv) resultDiv.innerHTML = "";
+    if (DOM.result) DOM.result.innerHTML = "";
 
     lastPicked = null;
     updateResultActions();
@@ -374,9 +526,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const snapshot = [...doneProjects];
     doneProjects = [];
+    doneSet.clear();
 
-    saveAll();
-    renderDone();
+    scheduleSave();
+    scheduleRender("done");
 
     setUndo({ type: "clearDone", snapshot });
     showToast(t("toast.cleared_done"), true);
@@ -391,8 +544,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const snapshot = [...history];
     history = [];
 
-    saveAll();
-    renderHistory();
+    scheduleSave();
+    scheduleRender("history");
 
     setUndo({ type: "clearHistory", snapshot });
     showToast(t("toast.cleared_history"), true);
@@ -400,125 +553,108 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ---------- rendering ----------
 
+  // Batch renders to next animation frame (prevents repeated DOM rebuilds per action)
+  const renderFlags = { projects: false, done: false, history: false, resultActions: false };
+  let renderQueued = false;
+  function scheduleRender(which) {
+    if (which && renderFlags.hasOwnProperty(which)) renderFlags[which] = true;
+    if (!renderQueued) {
+      renderQueued = true;
+      requestAnimationFrame(flushRender);
+    }
+  }
+
+  function flushRender() {
+    renderQueued = false;
+
+    if (renderFlags.projects) {
+      renderFlags.projects = false;
+      renderProjects();
+    }
+
+    if (renderFlags.done) {
+      renderFlags.done = false;
+      renderDone();
+    }
+
+    if (renderFlags.history) {
+      renderFlags.history = false;
+      renderHistory();
+    }
+
+    if (renderFlags.resultActions) {
+      renderFlags.resultActions = false;
+      updateResultActions();
+    }
+  }
+
   function renderProjects() {
-    const list = document.getElementById("projectList");
+    const list = DOM.projectList;
     if (!list) return;
 
-    list.innerHTML = "";
+    const ariaDone = escapeHTML(t("aria.done"));
+    const ariaDelete = escapeHTML(t("aria.delete"));
 
-    projects.forEach((project, index) => {
-      const li = document.createElement("li");
-      li.className = "item";
-
-      const text = document.createElement("span");
-      text.className = "item-text";
-      text.textContent = project;
-
-      const actions = document.createElement("div");
-      actions.className = "item-actions";
-
-      const doneBtn = document.createElement("button");
-      doneBtn.className = "icon-btn";
-      doneBtn.textContent = "✅";
-      doneBtn.title = t("aria.done");
-      doneBtn.setAttribute("aria-label", t("aria.done"));
-      doneBtn.addEventListener("click", () => markDone(index));
-
-      const delBtn = document.createElement("button");
-      delBtn.className = "icon-btn";
-      delBtn.textContent = "❌";
-      delBtn.title = t("aria.delete");
-      delBtn.setAttribute("aria-label", t("aria.delete"));
-      delBtn.addEventListener("click", () => deleteActive(index));
-
-      actions.appendChild(doneBtn);
-      actions.appendChild(delBtn);
-
-      li.appendChild(text);
-      li.appendChild(actions);
-      list.appendChild(li);
-    });
+    let html = "";
+    for (let i = 0; i < projects.length; i++) {
+      const project = projects[i];
+      html +=
+        `<li class="item">` +
+          `<span class="item-text">${escapeHTML(project)}</span>` +
+          `<div class="item-actions">` +
+            `<button class="icon-btn" data-action="done" data-index="${i}" title="${ariaDone}" aria-label="${ariaDone}">✅</button>` +
+            `<button class="icon-btn" data-action="delete" data-index="${i}" title="${ariaDelete}" aria-label="${ariaDelete}">❌</button>` +
+          `</div>` +
+        `</li>`;
+    }
+    list.innerHTML = html;
   }
 
   function renderDone() {
-    const list = document.getElementById("doneList");
-    const count = document.getElementById("doneCount");
-    if (count) count.textContent = String(doneProjects.length);
+    const list = DOM.doneList;
+    if (DOM.doneCount) DOM.doneCount.textContent = String(doneProjects.length);
     if (!list) return;
 
-    list.innerHTML = "";
+    const ariaRestore = escapeHTML(t("aria.restore"));
+    const ariaDelete = escapeHTML(t("aria.delete"));
 
-    doneProjects.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.className = "item";
-
-      const text = document.createElement("span");
-      text.className = "item-text";
-      text.textContent = item.name;
-
-      const meta = document.createElement("span");
-      meta.className = "item-meta";
-      meta.textContent = item.doneAt ? fmtTime(item.doneAt) : "";
-      text.appendChild(meta);
-
-      const actions = document.createElement("div");
-      actions.className = "item-actions";
-
-      const restoreBtn = document.createElement("button");
-      restoreBtn.className = "icon-btn";
-      restoreBtn.textContent = "↩️";
-      restoreBtn.title = t("aria.restore");
-      restoreBtn.setAttribute("aria-label", t("aria.restore"));
-      restoreBtn.addEventListener("click", () => restoreFromDone(index));
-
-      const delBtn = document.createElement("button");
-      delBtn.className = "icon-btn";
-      delBtn.textContent = "❌";
-      delBtn.title = t("aria.delete");
-      delBtn.setAttribute("aria-label", t("aria.delete"));
-      delBtn.addEventListener("click", () => deleteDone(index));
-
-      actions.appendChild(restoreBtn);
-      actions.appendChild(delBtn);
-
-      li.appendChild(text);
-      li.appendChild(actions);
-      list.appendChild(li);
-    });
+    let html = "";
+    for (let i = 0; i < doneProjects.length; i++) {
+      const item = doneProjects[i];
+      const meta = item && item.doneAt ? fmtTime(item.doneAt) : "";
+      html +=
+        `<li class="item">` +
+          `<span class="item-text">${escapeHTML(item.name)}<span class="item-meta">${escapeHTML(meta)}</span></span>` +
+          `<div class="item-actions">` +
+            `<button class="icon-btn" data-action="restore" data-index="${i}" title="${ariaRestore}" aria-label="${ariaRestore}">↩️</button>` +
+            `<button class="icon-btn" data-action="delete" data-index="${i}" title="${ariaDelete}" aria-label="${ariaDelete}">❌</button>` +
+          `</div>` +
+        `</li>`;
+    }
+    list.innerHTML = html;
   }
 
   function renderHistory() {
-    const list = document.getElementById("historyList");
-    const count = document.getElementById("historyCount");
-    if (count) count.textContent = String(history.length);
+    const list = DOM.historyList;
+    if (DOM.historyCount) DOM.historyCount.textContent = String(history.length);
     if (!list) return;
 
-    list.innerHTML = "";
-
-    history.forEach((h) => {
-      const li = document.createElement("li");
-      li.className = "item";
-
-      const text = document.createElement("span");
-      text.className = "item-text";
-
+    let html = "";
+    for (let i = 0; i < history.length; i++) {
+      const h = history[i];
       const actionLabel = t("history." + h.type);
-      text.textContent = `${actionLabel}: ${h.name}`;
-
-      const meta = document.createElement("span");
-      meta.className = "item-meta";
-      meta.textContent = h.at ? fmtTime(h.at) : "";
-      text.appendChild(meta);
-
-      li.appendChild(text);
-      list.appendChild(li);
-    });
+      const meta = h.at ? fmtTime(h.at) : "";
+      html +=
+        `<li class="item">` +
+          `<span class="item-text">${escapeHTML(actionLabel)}: ${escapeHTML(h.name)}<span class="item-meta">${escapeHTML(meta)}</span></span>` +
+        `</li>`;
+    }
+    list.innerHTML = html;
   }
 
   function updateResultActions() {
-    const actions = document.getElementById("resultActions");
-    if (!actions) return;
-    actions.hidden = !lastPicked;
+    if (!DOM.resultActions) return;
+    DOM.resultActions.hidden = !lastPicked;
   }
 
   // ---------- randomiser ----------
@@ -529,8 +665,8 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    const resultDiv = document.getElementById("result");
-    const button = document.getElementById("randomBtn");
+    const resultDiv = DOM.result;
+    const button = DOM.randomBtn;
 
     if (!resultDiv || !button) return;
 
@@ -651,26 +787,33 @@ document.addEventListener("DOMContentLoaded", function () {
           trimmed = trimmed.replace(/^"(.*)"$/, "$1");
           if (!trimmed) return;
 
+          const key = trimmed.toLowerCase();
+
           // if in done → restore
-          const doneIdx = findIndexCaseInsensitive(doneProjects, trimmed);
-          if (doneIdx !== -1) {
-            const item = doneProjects.splice(doneIdx, 1)[0];
-            if (!projects.some(p => p.toLowerCase() === item.name.toLowerCase())) {
-              projects.push(item.name);
+          if (doneSet.has(key)) {
+            const doneIdx = findIndexCaseInsensitive(doneProjects, trimmed);
+            if (doneIdx !== -1) {
+              const item = doneProjects.splice(doneIdx, 1)[0];
+              doneSet.delete(key);
+              if (!projectsSet.has(key)) {
+                projects.push(item.name);
+                projectsSet.add(key);
+              }
+              restored++;
+              return;
             }
-            restored++;
-            return;
           }
 
-          if (!projects.some((p) => p.toLowerCase() === trimmed.toLowerCase())) {
+          if (!projectsSet.has(key)) {
             projects.push(trimmed);
+            projectsSet.add(key);
             added++;
           }
         });
 
-        saveAll();
-        renderProjects();
-        renderDone();
+        scheduleSave();
+        scheduleRender("projects");
+        scheduleRender("done");
 
         const msg = t("alert.import_finished", { count: added });
         // Keep import alert simple; restoration is just a bonus
@@ -684,33 +827,73 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Event delegation (much faster than attaching listeners per row)
+  if (DOM.projectList) {
+    DOM.projectList.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-action]");
+      if (!btn) return;
+      const action = btn.dataset.action;
+      const index = Number(btn.dataset.index);
+      if (!Number.isFinite(index)) return;
+
+      if (action === "done") markDone(index);
+      if (action === "delete") deleteActive(index);
+    });
+  }
+
+  if (DOM.doneList) {
+    DOM.doneList.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-action]");
+      if (!btn) return;
+      const action = btn.dataset.action;
+      const index = Number(btn.dataset.index);
+      if (!Number.isFinite(index)) return;
+
+      if (action === "restore") restoreFromDone(index);
+      if (action === "delete") deleteDone(index);
+    });
+  }
+
   // help modal
   const modal = document.getElementById("helpModal");
   const helpBtn = document.getElementById("helpBtn");
   const closeBtn = document.querySelector(".close-btn");
 
-  if (helpBtn && modal && closeBtn) {
-    helpBtn.addEventListener("click", function () {
-      modal.style.display = "block";
-    });
+  function openModal() {
+    if (!modal) return;
+    modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
+    // best-effort focus
+    if (closeBtn) closeBtn.focus();
+  }
 
-    closeBtn.addEventListener("click", function () {
-      modal.style.display = "none";
-    });
+  function closeModal() {
+    if (!modal) return;
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  if (helpBtn && modal && closeBtn) {
+    helpBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
 
     window.addEventListener("click", function (event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
+      if (event.target === modal) closeModal();
     });
 
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") {
-        modal.style.display = "none";
+        closeModal();
         clearToast();
       }
     });
   }
+  // icon picker buttons (changes manifest/icon for the NEXT install)
+  document.querySelectorAll(".icon-chip").forEach((btn) => {
+    btn.addEventListener("click", () => applyIconVariant(btn.dataset.iconVariant));
+  });
+
+
 
   // Reload app (helps iOS homescreen caching)
   const reloadBtn = document.getElementById("reloadBtn");
@@ -723,8 +906,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       } catch {}
 
-      const url = window.location.pathname + "?v=" + Date.now();
-      window.location.href = url;
+      const url = new URL(window.location.href);
+      url.searchParams.set("v", String(Date.now()));
+      window.location.href = url.toString();
     });
   }
 
@@ -740,9 +924,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // initial render
-  buildLanguageSelectOrdered();
-  renderProjects();
-  renderDone();
-  renderHistory();
-  updateResultActions();
+  buildLanguageSelectEnglishAlphabetical();
+
+  // Re-render lists on language change (button aria labels, history verbs)
+  if (DOM.langSelect) {
+    DOM.langSelect.addEventListener("change", () => {
+      scheduleRender("projects");
+      scheduleRender("done");
+      scheduleRender("history");
+    });
+  }
+
+  scheduleRender("projects");
+  scheduleRender("done");
+  scheduleRender("history");
+  scheduleRender("resultActions");
 });

@@ -22,12 +22,14 @@
 
     "help.btn": "❓ HowTo",
     "help.title": "How to use RandomiseMe",
-    "help.body": "1. Add projects manually or import a .txt or .csv list.<br><br>2. Click \"Let's roll!\" to randomly select a single project.<br><br>3. Use \"Clear all UFOs\" to reset your list.<br><br>Imported lists can be separated by commas, semicolons, line breaks or tabs.",
+    "help.body": "1. Add projects manually or import a .txt/.csv list.<br><br>2. Tap 🎲 to randomly pick one project.<br><br>3. 🗑 resets the active list (Done & History stay).<br><br>Imported lists may be separated by commas, semicolons, line breaks or tabs.<br><br>4. Entries can be marked as done and restored.<br><br>5. Done and History can be cleared if needed.<br><br>Note: Your list is stored locally in your browser. If you clear this site’s data, it will be lost.",
     "help.update_hint": "If the Home Screen app does not update properly:",
     "help.reload": "🔄 Reload app",
 
+    "iconpicker.note": "After changing, add to Home Screen / install again.",
+    "iconpicker.title": "App icon color (for installation)",
     "footer.created": "RandomiseMe! – created by Nico Siedler",
-    "footer.license": "Version 0.3a 02/2026 published under GPL3",
+    "footer.license": "Version 0.7a 02/2026 published under GPL3",
 
     "confirm.clear": "Clear all active projects? (Done & history stay.)",
     "confirm.clear_done": "Clear done list?",
@@ -75,30 +77,32 @@
     "lang.name": "🇩🇪 DE",
     "lang.label": "Sprache",
     "flavour.text": "Hallo, wie geht’s dir heute? <br> Lass uns ein Projekt finden! :)",
-    "input.placeholder": "Projektname eingeben",
-    "btn.add": "Projekt hinzufügen",
-    "btn.import": "📂 Liste importieren (txt oder csv)",
+    "input.placeholder": "Projekt eingeben",
+    "btn.add": "Hinzufügen",
+    "btn.import": "📂 Liste importieren (.txt oder .csv)",
     "heading.list": "Meine UFOs:",
     "btn.clear": "🗑 Alle UFOs löschen",
     "btn.roll": "🎲 Würfeln!",
 
     "heading.done": "Erledigt:",
     "heading.history": "Verlauf:",
-    "btn.clear_done": "🧹 Erledigte löschen",
-    "btn.clear_history": "🗑 Verlauf löschen",
-    "btn.copy_history": "📋 Verlauf kopieren",
-    "btn.mark_done": "✅ Als erledigt markieren",
+    "btn.clear_done": "🧹 Löschen",
+    "btn.clear_history": "🗑 Löschen",
+    "btn.copy_history": "📋 Kopieren",
+    "btn.mark_done": "✅ Erledigt!",
     "btn.copy": "📋 Kopieren",
     "btn.undo": "Rückgängig",
 
-    "help.btn": "❓ Anleitung",
+    "help.btn": "❓ Hilfe",
     "help.title": "So nutzt du RandomiseMe",
-    "help.body": "1. Projekte manuell hinzufügen oder eine .txt-/.csv-Liste importieren.<br><br>2. Auf „Würfeln!“ klicken, um zufällig ein Projekt auszuwählen.<br><br>3. „Alle UFOs löschen“ setzt die Liste zurück.<br><br>Importierte Listen dürfen durch Kommas, Semikolons, Zeilenumbrüche oder Tabs getrennt sein.",
+    "help.body": "1. Projekte manuell hinzufügen oder eine .txt/.csv-Liste importieren.<br><br>2. Tippe auf 🎲, um zufällig ein Projekt auszuwählen.<br><br>3. 🗑 setzt die aktive Liste zurück (Erledigt & Verlauf bleiben).<br><br>Importierte Listen dürfen durch Kommas, Semikola, Zeilenumbrüche oder Tabs getrennt sein.<br><br>4. Einträge können als erledigt markiert und wiederhergestellt werden.<br><br>5. Verlauf und erledigte Projekte können bei Bedarf geleert werden.<br><br>Hinweis: Deine Liste wird lokal im Browser gespeichert. Wenn du die Website-Daten dieser Seite löschst, ist sie weg.",
     "help.update_hint": "Falls die Homescreen-App sich nicht richtig aktualisiert:",
     "help.reload": "🔄 App neu laden",
 
+    "iconpicker.note": "Nach dem Ändern bitte neu zum Homescreen hinzufügen / neu installieren.",
+    "iconpicker.title": "App-Icon-Farbe (für Installation)",
     "footer.created": "RandomiseMe! – erstellt von Nico Siedler",
-    "footer.license": "Version 0.3a 02/2026 veröffentlicht unter GPL3",
+    "footer.license": "Version 0.7a 02/2026 veröffentlicht unter GPL3",
 
     "confirm.clear": "Alle aktiven Projekte löschen? (Erledigt & Verlauf bleiben.)",
     "confirm.clear_done": "Erledigt-Liste wirklich leeren?",
@@ -162,14 +166,16 @@
     "btn.copy": "📋 Copier",
     "btn.undo": "Annuler",
 
-    "help.btn": "❓ Mode d’emploi",
+    "help.btn": "❓ Quoi",
     "help.title": "Comment utiliser RandomiseMe",
-    "help.body": "1. Ajoute des projets manuellement ou importe une liste .txt ou .csv.<br><br>2. Clique sur « On lance ! » pour choisir un projet au hasard.<br><br>3. Utilise « Tout effacer » pour réinitialiser la liste.<br><br>Les listes importées peuvent être séparées par des virgules, des points-virgules, des retours à la ligne ou des tabulations.",
+    "help.body": "1. Ajoute des projets manuellement ou importe une liste .txt/.csv.<br><br>2. Appuie sur 🎲 pour tirer un projet au hasard.<br><br>3. 🗑 réinitialise la liste active (Terminés & Historique restent).<br><br>Les listes importées peuvent être séparées par des virgules, des points-virgules, des retours à la ligne ou des tabulations.<br><br>4. Les entrées peuvent être marquées comme terminées et restaurées.<br><br>5. L’historique et les terminés peuvent être vidés si besoin.<br><br>Note : ta liste est stockée localement dans le navigateur. Si tu effaces les données du site, elle sera perdue.",
     "help.update_hint": "Si l’app sur l’écran d’accueil ne se met pas à jour correctement :",
     "help.reload": "🔄 Recharger l’app",
 
+    "iconpicker.note": "Après modification, ajoute / installe de nouveau.",
+    "iconpicker.title": "Couleur de l’icône (installation)",
     "footer.created": "RandomiseMe! – créé par Nico Siedler",
-    "footer.license": "Version 0.3a 02/2026 publiée sous GPL3",
+    "footer.license": "Version 0.7a 02/2026 publiée sous GPL3",
 
     "confirm.clear": "Effacer tous les projets actifs ? (Terminés + historique restent.)",
     "confirm.clear_done": "Vider la liste des terminés ?",
@@ -235,12 +241,14 @@
 
     "help.btn": "❓ Guida",
     "help.title": "Come usare RandomiseMe",
-    "help.body": "1. Aggiungi i progetti a mano o importa una lista .txt o .csv.<br><br>2. Clicca « Via! » per scegliere un progetto a caso.<br><br>3. Usa « Cancella tutto » per azzerare la lista.<br><br>Le liste importate possono essere separate da virgole, punti e virgola, a capo o tabulazioni.",
+    "help.body": "1. Aggiungi progetti a mano o importa una lista .txt/.csv.<br><br>2. Tocca 🎲 per scegliere un progetto a caso.<br><br>3. 🗑 azzera la lista attiva (Fatti & Cronologia restano).<br><br>Le liste importate possono essere separate da virgole, punti e virgola, a capo o tab.<br><br>4. Le voci possono essere segnate come completate e ripristinate.<br><br>5. Cronologia e completati possono essere svuotati se necessario.<br><br>Nota: la lista viene salvata localmente nel browser. Se cancelli i dati di questo sito, andrà persa.",
     "help.update_hint": "Se l’app nella schermata Home non si aggiorna correttamente:",
     "help.reload": "🔄 Ricarica app",
 
+    "iconpicker.note": "Dopo la modifica, aggiungi / reinstalla di nuovo.",
+    "iconpicker.title": "Colore dell’icona (installazione)",
     "footer.created": "RandomiseMe! – creato da Nico Siedler",
-    "footer.license": "Versione 0.3a 02/2026 pubblicata sotto GPL3",
+    "footer.license": "Versione 0.7a 02/2026 pubblicata sotto GPL3",
 
     "confirm.clear": "Cancellare tutti i progetti attivi? (Fatti e cronologia restano.)",
     "confirm.clear_done": "Svuotare la lista dei fatti?",
@@ -306,12 +314,14 @@
 
     "help.btn": "❓ Cómo se usa",
     "help.title": "Cómo usar RandomiseMe",
-    "help.body": "1. Añade proyectos manualmente o importa una lista .txt o .csv.<br><br>2. Pulsa « ¡A rodar! » para elegir un proyecto al azar.<br><br>3. Usa « Borrar todo » para reiniciar la lista.<br><br>Las listas importadas pueden separarse por comas, punto y coma, saltos de línea o tabulaciones.",
+    "help.body": "1. Añade proyectos manualmente o importa una lista .txt/.csv.<br><br>2. Pulsa 🎲 para elegir un proyecto al azar.<br><br>3. 🗑 reinicia la lista activa (Hechos e Historial se mantienen).<br><br>Las listas importadas pueden separarse por comas, punto y coma, saltos de línea o tabulaciones.<br><br>4. Las entradas se pueden marcar como hechas y restaurar.<br><br>5. El historial y los hechos se pueden vaciar si hace falta.<br><br>Nota: tu lista se guarda localmente en el navegador. Si borras los datos de este sitio, se perderá.",
     "help.update_hint": "Si la app en la pantalla de inicio no se actualiza bien:",
     "help.reload": "🔄 Recargar app",
 
+    "iconpicker.note": "Después de cambiarlo, vuelve a añadir / instalar.",
+    "iconpicker.title": "Color del icono (instalación)",
     "footer.created": "RandomiseMe! – creado por Nico Siedler",
-    "footer.license": "Versión 0.3a 02/2026 publicada bajo GPL3",
+    "footer.license": "Versión 0.7a 02/2026 publicada bajo GPL3",
 
     "confirm.clear": "¿Borrar todos los proyectos activos? (Hechos e historial se conservan.)",
     "confirm.clear_done": "¿Vaciar la lista de hechos?",
@@ -377,12 +387,14 @@
 
     "help.btn": "❓ Instrukcja",
     "help.title": "Jak używać RandomiseMe",
-    "help.body": "1. Dodaj projekty ręcznie lub zaimportuj listę .txt albo .csv.<br><br>2. Kliknij « Losuj! », aby wylosować jeden projekt.<br><br>3. Użyj « Wyczyść wszystko », aby zresetować listę.<br><br>Importowane listy mogą być rozdzielone przecinkami, średnikami, znakami nowej linii lub tabulatorami.",
+    "help.body": "1. Dodaj projekty ręcznie albo zaimportuj listę .txt/.csv.<br><br>2. Kliknij 🎲, aby losowo wybrać jeden projekt.<br><br>3. 🗑 czyści listę aktywną (Zrobione i Historia zostają).<br><br>Importowane listy mogą być rozdzielane przecinkami, średnikami, nowymi liniami lub tabulatorami.<br><br>4. Pozycje można oznaczać jako zrobione i przywracać.<br><br>5. Historię i zrobione można wyczyścić w razie potrzeby.<br><br>Uwaga: lista jest zapisywana lokalnie w przeglądarce. Jeśli usuniesz dane tej strony, zniknie.",
     "help.update_hint": "Jeśli aplikacja na ekranie głównym nie aktualizuje się poprawnie:",
     "help.reload": "🔄 Przeładuj aplikację",
 
+    "iconpicker.note": "Po zmianie dodaj / zainstaluj ponownie.",
+    "iconpicker.title": "Kolor ikony (instalacja)",
     "footer.created": "RandomiseMe! – autor: Nico Siedler",
-    "footer.license": "Wersja 0.3a 02/2026 opublikowana na licencji GPL3",
+    "footer.license": "Wersja 0.7a 02/2026 opublikowana na licencji GPL3",
 
     "confirm.clear": "Usunąć wszystkie aktywne projekty? (Zrobione i historia zostają.)",
     "confirm.clear_done": "Wyczyścić listę zrobionych?",
@@ -448,12 +460,14 @@
 
     "help.btn": "❓ Como usar",
     "help.title": "Como usar o RandomiseMe",
-    "help.body": "1. Adiciona projetos manualmente ou importa uma lista .txt ou .csv.<br><br>2. Clica em « Vamos lá! » para escolher um projeto ao acaso.<br><br>3. Usa « Limpar tudo » para reiniciar a lista.<br><br>As listas importadas podem ser separadas por vírgulas, ponto e vírgula, quebras de linha ou tabulações.",
+    "help.body": "1. Adiciona projetos manualmente ou importa uma lista .txt/.csv.<br><br>2. Toca em 🎲 para escolher um projeto ao acaso.<br><br>3. 🗑 repõe a lista ativa (Concluídos e Histórico ficam).<br><br>As listas importadas podem ser separadas por vírgulas, ponto e vírgula, quebras de linha ou tab.<br><br>4. As entradas podem ser marcadas como concluídas e restauradas.<br><br>5. O histórico e os concluídos podem ser limpos quando precisares.<br><br>Nota: a lista é guardada localmente no browser. Se apagares os dados deste site, ela perde-se.",
     "help.update_hint": "Se a app no ecrã inicial não atualizar corretamente:",
     "help.reload": "🔄 Recarregar app",
 
+    "iconpicker.note": "Depois de alterar, volta a adicionar / instalar.",
+    "iconpicker.title": "Cor do ícone (instalação)",
     "footer.created": "RandomiseMe! – criado por Nico Siedler",
-    "footer.license": "Versão 0.3a 02/2026 publicada sob GPL3",
+    "footer.license": "Versão 0.7a 02/2026 publicada sob GPL3",
 
     "confirm.clear": "Limpar todos os projetos ativos? (Feitos e histórico ficam.)",
     "confirm.clear_done": "Limpar a lista de feitos?",
@@ -519,12 +533,14 @@
 
     "help.btn": "❓ Hjälp",
     "help.title": "Så använder du RandomiseMe",
-    "help.body": "1. Lägg till projekt manuellt eller importera en .txt- eller .csv-lista.<br><br>2. Klicka på « Kör! » för att slumpa fram ett projekt.<br><br>3. Använd « Rensa allt » för att återställa listan.<br><br>Importerade listor kan vara separerade med kommatecken, semikolon, radbrytningar eller tabbar.",
+    "help.body": "1. Lägg till projekt manuellt eller importera en .txt/.csv-lista.<br><br>2. Tryck på 🎲 för att slumpa fram ett projekt.<br><br>3. 🗑 nollställer den aktiva listan (Klart & Historik behålls).<br><br>Importerade listor kan separeras med kommatecken, semikolon, radbrytningar eller tabbar.<br><br>4. Poster kan markeras som klara och återställas.<br><br>5. Historik och klara poster kan rensas vid behov.<br><br>Obs: listan sparas lokalt i din webbläsare. Om du rensar webbplatsens data försvinner den.",
     "help.update_hint": "Om appen på hemskärmen inte uppdateras som den ska:",
     "help.reload": "🔄 Ladda om appen",
 
+    "iconpicker.note": "Efter ändring: installera/lägg till igen.",
+    "iconpicker.title": "Ikonfärg (installation)",
     "footer.created": "RandomiseMe! – skapad av Nico Siedler",
-    "footer.license": "Version 0.3a 02/2026 publicerad under GPL3",
+    "footer.license": "Version 0.7a 02/2026 publicerad under GPL3",
 
     "confirm.clear": "Rensa alla aktiva projekt? (Klara + historik sparas.)",
     "confirm.clear_done": "Rensa listan med klara?",
@@ -590,12 +606,14 @@
 
     "help.btn": "❓ Hjælp",
     "help.title": "Sådan bruger du RandomiseMe",
-    "help.body": "1. Tilføj projekter manuelt eller importér en .txt- eller .csv-liste.<br><br>2. Klik på « Kom så! » for at vælge et projekt tilfældigt.<br><br>3. Brug « Ryd alt » for at nulstille listen.<br><br>Importerede lister kan adskilles med kommaer, semikolon, linjeskift eller tabulatorer.",
+    "help.body": "1. Tilføj projekter manuelt eller importér en .txt/.csv-liste.<br><br>2. Tryk på 🎲 for at vælge et projekt tilfældigt.<br><br>3. 🗑 nulstiller den aktive liste (Færdige & Historik bevares).<br><br>Importerede lister kan være adskilt med kommaer, semikolon, linjeskift eller tabulatorer.<br><br>4. Elementer kan markeres som færdige og gendannes.<br><br>5. Historik og færdige elementer kan ryddes efter behov.<br><br>Note: din liste gemmes lokalt i browseren. Hvis du sletter webstedets data, forsvinder den.",
     "help.update_hint": "Hvis appen på hjemmeskærmen ikke opdaterer korrekt:",
     "help.reload": "🔄 Genindlæs app",
 
+    "iconpicker.note": "Efter ændring: installér/tilføj igen.",
+    "iconpicker.title": "Ikonfarve (installation)",
     "footer.created": "RandomiseMe! – lavet af Nico Siedler",
-    "footer.license": "Version 0.3a 02/2026 udgivet under GPL3",
+    "footer.license": "Version 0.7a 02/2026 udgivet under GPL3",
 
     "confirm.clear": "Ryd alle aktive projekter? (Færdige + historik bliver.)",
     "confirm.clear_done": "Ryd listen over færdige?",
@@ -661,12 +679,14 @@
 
     "help.btn": "❓ Как пользоваться",
     "help.title": "Как пользоваться RandomiseMe",
-    "help.body": "1. Добавляй проекты вручную или импортируй список .txt или .csv.<br><br>2. Нажми « Поехали! », чтобы случайно выбрать один проект.<br><br>3. « Очистить всё » сбрасывает список.<br><br>В импортируемых списках разделителями могут быть запятые, точки с запятой, переносы строк или табуляция.",
+    "help.body": "1. Добавляйте проекты вручную или импортируйте список .txt/.csv.<br><br>2. Нажмите 🎲, чтобы случайно выбрать один проект.<br><br>3. 🗑 очищает активный список (Готово и История остаются).<br><br>В импортируемых списках разделителями могут быть запятые, точки с запятой, переносы строк или табуляция.<br><br>4. Записи можно отмечать как выполненные и восстанавливать.<br><br>5. Историю и выполненные проекты можно очищать при необходимости.<br><br>Примечание: список хранится локально в вашем браузере. Если удалить данные этого сайта, список пропадёт.",
     "help.update_hint": "Если приложение на домашнем экране не обновляется корректно:",
     "help.reload": "🔄 Перезагрузить приложение",
 
+    "iconpicker.note": "После смены установите/добавьте заново.",
+    "iconpicker.title": "Цвет иконки (установка)",
     "footer.created": "RandomiseMe! – автор: Nico Siedler",
-    "footer.license": "Версия 0.3a 02/2026 опубликовано под GPL3",
+    "footer.license": "Версия 0.7a 02/2026 опубликовано под GPL3",
 
     "confirm.clear": "Очистить все активные проекты? («Сделано» и история останутся.)",
     "confirm.clear_done": "Очистить список «Сделано»?",
@@ -732,12 +752,14 @@
 
     "help.btn": "❓ Návod",
     "help.title": "Jak používat RandomiseMe",
-    "help.body": "1. Přidej projekty ručně nebo importuj seznam .txt či .csv.<br><br>2. Klikni na « Jdeme na to! », aby se náhodně vybral jeden projekt.<br><br>3. « Smazat vše » vymaže celý seznam.<br><br>Importované seznamy mohou být oddělené čárkami, středníky, zalomením řádku nebo tabulátory.",
+    "help.body": "1. Přidej projekty ručně nebo importuj seznam .txt/.csv.<br><br>2. Klikni na 🎲 a náhodně vyber jeden projekt.<br><br>3. 🗑 vymaže aktivní seznam (Hotovo a Historie zůstávají).<br><br>Importované seznamy mohou být oddělené čárkami, středníky, konci řádků nebo tabulátory.<br><br>4. Položky lze označit jako hotové a obnovit.<br><br>5. Historii a hotové položky lze podle potřeby vymazat.<br><br>Poznámka: seznam se ukládá lokálně v prohlížeči. Když smažeš data tohoto webu, seznam zmizí.",
     "help.update_hint": "Pokud se aplikace na domovské obrazovce neaktualizuje správně:",
     "help.reload": "🔄 Načíst znovu",
 
+    "iconpicker.note": "Po změně znovu nainstaluj / přidej.",
+    "iconpicker.title": "Barva ikony (instalace)",
     "footer.created": "RandomiseMe! – vytvořil Nico Siedler",
-    "footer.license": "Verze 0.3a 02/2026 vydáno pod GPL3",
+    "footer.license": "Verze 0.7a 02/2026 vydáno pod GPL3",
 
     "confirm.clear": "Smazat všechny aktivní projekty? (Hotovo + historie zůstane.)",
     "confirm.clear_done": "Vymazat seznam hotových?",
@@ -803,12 +825,14 @@
 
     "help.btn": "❓ Hjelp",
     "help.title": "Slik bruker du RandomiseMe",
-    "help.body": "1. Legg til prosjekter manuelt eller importer en .txt- eller .csv-liste.<br><br>2. Trykk « Kjør! » for å velge et prosjekt tilfeldig.<br><br>3. « Tøm alt » nullstiller listen.<br><br>Importer­te lister kan være separert med komma, semikolon, linjeskift eller tabulator.",
+    "help.body": "1. Legg til prosjekter manuelt eller importer en .txt/.csv-liste.<br><br>2. Trykk på 🎲 for å velge et prosjekt tilfeldig.<br><br>3. 🗑 nullstiller den aktive listen (Ferdig og Historikk beholdes).<br><br>Importerte lister kan skilles med komma, semikolon, linjeskift eller tabulator.<br><br>4. Elementer kan markeres som ferdige og gjenopprettes.<br><br>5. Historikk og ferdige elementer kan tømmes ved behov.<br><br>Merk: listen lagres lokalt i nettleseren. Hvis du sletter nettstedets data, forsvinner den.",
     "help.update_hint": "Hvis appen på hjemskjermen ikke oppdaterer riktig:",
     "help.reload": "🔄 Last inn på nytt",
 
+    "iconpicker.note": "Etter endring: installer/legg til på nytt.",
+    "iconpicker.title": "Ikonfarge (installasjon)",
     "footer.created": "RandomiseMe! – laget av Nico Siedler",
-    "footer.license": "Versjon 0.3a 02/2026 publisert under GPL3",
+    "footer.license": "Versjon 0.7a 02/2026 publisert under GPL3",
 
     "confirm.clear": "Tøm alle aktive prosjekter? (Ferdige + historikk blir.)",
     "confirm.clear_done": "Tømme listen over ferdige?",
@@ -874,12 +898,14 @@
 
     "help.btn": "❓ Ohje",
     "help.title": "Näin käytät RandomiseMe:tä",
-    "help.body": "1. Lisää projekteja käsin tai tuo .txt- tai .csv‑lista.<br><br>2. Paina « Anna mennä! » valitaksesi yhden projektin satunnaisesti.<br><br>3. « Tyhjennä kaikki » nollaa listan.<br><br>Tuodut listat voivat olla eroteltu pilkuilla, puolipisteillä, rivinvaihdoilla tai sarkaimilla.",
+    "help.body": "1. Lisää projekteja käsin tai tuo .txt/.csv-lista.<br><br>2. Napauta 🎲 valitaksesi projektin satunnaisesti.<br><br>3. 🗑 tyhjentää aktiivisen listan (Valmiit ja Historia jäävät).<br><br>Tuoduissa listoissa erottimina voivat olla pilkut, puolipisteet, rivinvaihdot tai sarkaimet.<br><br>4. Kohteet voi merkitä valmiiksi ja palauttaa.<br><br>5. Historian ja valmiit voi tyhjentää tarvittaessa.<br><br>Huom: lista tallennetaan paikallisesti selaimeen. Jos poistat tämän sivuston tiedot, lista katoaa.",
     "help.update_hint": "Jos aloitusnäytön sovellus ei päivity oikein:",
     "help.reload": "🔄 Lataa uudelleen",
 
+    "iconpicker.note": "Muutoksen jälkeen asenna/lisää uudelleen.",
+    "iconpicker.title": "Kuvakkeen väri (asennus)",
     "footer.created": "RandomiseMe! – tehnyt Nico Siedler",
-    "footer.license": "Versio 0.3a 02/2026 julkaistu GPL3-lisenssillä",
+    "footer.license": "Versio 0.7a 02/2026 julkaistu GPL3-lisenssillä",
 
     "confirm.clear": "Tyhjennetäänkö kaikki aktiiviset projektit? (Valmiit ja historia jäävät.)",
     "confirm.clear_done": "Tyhjennetäänkö valmiiden lista?",
@@ -911,7 +937,7 @@
 
     "exclamations": [
       "Katso:",
-      "Bam:",
+      "Satana...:",
       "Ole hyvä:",
       "No niin:",
       "Arvaa:",
@@ -919,7 +945,7 @@
       "Onnekas sinä:",
       "Mennään:",
       "Ta‑da:",
-      "Et voilà:"
+      "Perkele...:"
     ]
   },
 
@@ -945,12 +971,14 @@
 
   "help.btn": "❓ Як користуватися",
   "help.title": "Як користуватися RandomiseMe",
-  "help.body": "1. Додавай проєкти вручну або імпортуй список .txt чи .csv.<br><br>2. Натисни « Поїхали! », щоб випадково обрати один проєкт.<br><br>3. « Очистити все » скидає список.<br><br>У списках для імпорту розділювачами можуть бути коми, крапки з комою, переноси рядків або табуляція.",
+  "help.body": "1. Додай проєкти вручну або імпортуй список .txt/.csv.<br><br>2. Натисни 🎲, щоб випадково вибрати один проєкт.<br><br>3. 🗑 очищає активний список (Готово та Історія залишаються).<br><br>У імпортованих списках розділювачами можуть бути коми, крапки з комою, переноси рядка або табуляція.<br><br>4. Записи можна позначати як виконані та відновлювати.<br><br>5. Історію та виконані можна очистити за потреби.<br><br>Примітка: список зберігається локально у браузері. Якщо видалиш дані цього сайту, список зникне.",
   "help.update_hint": "Якщо застосунок на головному екрані не оновлюється коректно:",
   "help.reload": "🔄 Перезавантажити застосунок",
 
+    "iconpicker.note": "Після зміни встанови/додай знову.",
+    "iconpicker.title": "Колір іконки (встановлення)",
   "footer.created": "RandomiseMe! – автор: Nico Siedler",
-  "footer.license": "Версія 0.3a 02/2026 опубліковано під GPL3",
+  "footer.license": "Версія 0.7a 02/2026 опубліковано під GPL3",
 
   "confirm.clear": "Очистити всі активні проєкти? («Зроблено» та історія залишаться.)",
   "confirm.clear_done": "Очистити список «Зроблено»?",
@@ -1000,28 +1028,30 @@
   "flavour.text": "Γεια σου, πώς είσαι σήμερα; <br> Πάμε να διαλέξουμε ένα πρότζεκτ! :)",
   "input.placeholder": "Πληκτρολόγησε το όνομα του πρότζεκτ",
   "btn.add": "Προσθήκη",
-  "btn.import": "📂 Εισαγωγή λίστας (txt ή csv)",
+  "btn.import": "📂 Εισαγωγή (txt ή csv)",
   "heading.list": "Τα ανολοκλήρωτα πρότζεκτ μου:",
-  "btn.clear": "🗑 Καθαρισμός όλων",
-  "btn.roll": "🎲 Πάμε!",
+  "btn.clear": "🗑 Εκκαθάριση",
+  "btn.roll": "🎲 Κλήρωση",
 
   "heading.done": "Ολοκληρωμένα:",
   "heading.history": "Ιστορικό:",
-  "btn.clear_done": "🧹 Καθαρισμός «Ολοκληρωμένων»",
-  "btn.clear_history": "🗑 Καθαρισμός ιστορικού",
-  "btn.copy_history": "📋 Αντιγραφή ιστορικού",
-  "btn.mark_done": "✅ Σήμανση ως ολοκληρωμένο",
+  "btn.clear_done": "🧹 Εκκαθάριση",
+  "btn.clear_history": "🗑 Εκκαθάριση",
+  "btn.copy_history": "📋 Αντιγραφή",
+  "btn.mark_done": "✅ Ολοκληρώθηκε",
   "btn.copy": "📋 Αντιγραφή",
   "btn.undo": "Αναίρεση",
 
-  "help.btn": "❓ Οδηγίες",
+  "help.btn": "❓ Βοήθεια",
   "help.title": "Πώς να χρησιμοποιήσεις το RandomiseMe",
-  "help.body": "1. Πρόσθεσε πρότζεκτ χειροκίνητα ή εισήγαγε λίστα .txt ή .csv.<br><br>2. Πάτησε « Πάμε! » για να επιλέξεις τυχαία ένα πρότζεκτ.<br><br>3. Το « Καθαρισμός όλων » μηδενίζει τη λίστα.<br><br>Στις λίστες εισαγωγής, διαχωριστικά μπορούν να είναι κόμματα, ελληνικά/λατινικά ερωτηματικά-άνω τελείες (;), αλλαγές γραμμής ή tab.",
+  "help.body": "1. Πρόσθεσε πρότζεκτ χειροκίνητα ή εισήγαγε λίστα .txt/.csv.<br><br>2. Πάτησε 🎲 για να επιλέξεις τυχαία ένα πρότζεκτ.<br><br>3. 🗑 μηδενίζει την ενεργή λίστα (Ολοκληρωμένα & Ιστορικό μένουν).<br><br>Στις λίστες εισαγωγής, διαχωριστικά μπορούν να είναι κόμματα, ερωτηματικά/άνω τελείες (;), αλλαγές γραμμής ή tab.<br><br>4. Οι εγγραφές μπορούν να σημειωθούν ως ολοκληρωμένες και να επαναφερθούν.<br><br>5. Το ιστορικό και τα ολοκληρωμένα μπορούν να καθαριστούν όταν χρειάζεται.<br><br>Σημείωση: η λίστα αποθηκεύεται τοπικά στον browser. Αν διαγράψεις τα δεδομένα αυτής της σελίδας, θα χαθεί.",
   "help.update_hint": "Αν η εφαρμογή στην αρχική οθόνη δεν ενημερώνεται σωστά:",
   "help.reload": "🔄 Επαναφόρτωση εφαρμογής",
 
+    "iconpicker.note": "Μετά την αλλαγή, πρόσθεσε/εγκατέστησε ξανά.",
+    "iconpicker.title": "Χρώμα εικονιδίου (εγκατάσταση)",
   "footer.created": "RandomiseMe! – δημιουργός: Nico Siedler",
-  "footer.license": "Έκδοση 0.3a 02/2026 δημοσιεύτηκε υπό GPL3",
+  "footer.license": "Έκδοση 0.7a 02/2026 δημοσιεύτηκε υπό GPL3",
 
   "confirm.clear": "Να καθαριστούν όλα τα ενεργά πρότζεκτ; («Ολοκληρωμένα» και ιστορικό θα παραμείνουν.)",
   "confirm.clear_done": "Να καθαριστεί η λίστα «Ολοκληρωμένα»;",
@@ -1087,12 +1117,14 @@
 
   "help.btn": "❓ Hoe werkt het",
   "help.title": "Zo gebruik je RandomiseMe",
-  "help.body": "1. Voeg projecten handmatig toe of importeer een .txt- of .csv-lijst.<br><br>2. Klik op « Kom maar op! » om willekeurig één project te kiezen.<br><br>3. « Alles wissen » leegt de lijst.<br><br>In importlijsten kunnen komma’s, puntkomma’s, regeleinden of tabs als scheidingsteken worden gebruikt.",
+  "help.body": "1. Voeg projecten handmatig toe of importeer een .txt/.csv-lijst.<br><br>2. Tik op 🎲 om willekeurig één project te kiezen.<br><br>3. 🗑 wist de actieve lijst (Klaar & Geschiedenis blijven).<br><br>Geïmporteerde lijsten mogen gescheiden zijn door komma’s, puntkomma’s, regeleinden of tabs.<br><br>4. Items kunnen als klaar worden gemarkeerd en worden hersteld.<br><br>5. Geschiedenis en klaar kunnen indien nodig worden gewist.<br><br>Let op: je lijst wordt lokaal in je browser opgeslagen. Als je de sitegegevens wist, ben je alles kwijt.",
   "help.update_hint": "Als de app op het startscherm niet goed wordt bijgewerkt:",
   "help.reload": "🔄 App opnieuw laden",
 
+    "iconpicker.note": "Na wijziging: opnieuw installeren/toevoegen.",
+    "iconpicker.title": "Icoonkleur (installatie)",
   "footer.created": "RandomiseMe! – gemaakt door: Nico Siedler",
-  "footer.license": "Versie 0.3a 02/2026 gepubliceerd onder GPL3",
+  "footer.license": "Versie 0.7a 02/2026 gepubliceerd onder GPL3",
 
   "confirm.clear": "Alle actieve projecten wissen? («Gedaan» en geschiedenis blijven behouden.)",
   "confirm.clear_done": "De lijst «Gedaan» wissen?",
@@ -1158,12 +1190,14 @@
 
   "help.btn": "❓ Nasıl kullanılır",
   "help.title": "RandomiseMe nasıl kullanılır",
-  "help.body": "1. Projeleri elle ekle ya da .txt veya .csv listesini içe aktar.<br><br>2. Rastgele bir proje seçmek için « Haydi! » düğmesine bas.<br><br>3. « Hepsini temizle » listeyi sıfırlar.<br><br>İçe aktarılan listelerde ayraç olarak virgül, noktalı virgül, satır sonu veya sekme kullanılabilir.",
+  "help.body": "1. Projeleri elle ekle veya .txt/.csv listesini içe aktar.<br><br>2. Rastgele bir proje seçmek için 🎲’ye dokun.<br><br>3. 🗑 etkin listeyi sıfırlar (Tamamlananlar ve Geçmiş kalır).<br><br>İçe aktarılan listeler virgül, noktalı virgül, satır sonu veya sekme ile ayrılabilir.<br><br>4. Öğeler tamamlandı olarak işaretlenebilir ve geri yüklenebilir.<br><br>5. Geçmiş ve tamamlananlar gerektiğinde temizlenebilir.<br><br>Not: listen tarayıcında yerel olarak saklanır. Bu sitenin verilerini silersen liste kaybolur.",
   "help.update_hint": "Ana ekrandaki uygulama doğru şekilde güncellenmiyorsa:",
   "help.reload": "🔄 Uygulamayı yeniden yükle",
 
+    "iconpicker.note": "Değişiklikten sonra yeniden yükle/ekle.",
+    "iconpicker.title": "Simge rengi (yükleme)",
   "footer.created": "RandomiseMe! – yapan: Nico Siedler",
-  "footer.license": "Sürüm 0.3a 02/2026 GPL3 ile yayımlandı",
+  "footer.license": "Sürüm 0.7a 02/2026 GPL3 ile yayımlandı",
 
   "confirm.clear": "Tüm aktif projeler temizlensin mi? («Tamamlananlar» ve geçmiş kalacak.)",
   "confirm.clear_done": "«Tamamlananlar» listesi temizlensin mi?",
