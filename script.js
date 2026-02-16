@@ -1,307 +1,244 @@
-/* =========================================================
-   Project: RandomiseMe!
-   Author: Nico Siedler (git: ricodelsien)
-   File: script.js
-   Version: 0.3c
-   Date: 2026-02-15
-   Description:
-   - Random project shuffler
-   - Multi-language (DE / EN)
-   - LocalStorage persistence
-   - Modal support (HowTo)
-   - Import support (.txt/.csv)
-   ========================================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-const translations = {
-  de: {
-    flavour: "Ertrinkst du noch in Projekten?<br>Dann sag ihnen: Alea iacta est!",
-    inputPlaceholder: "Projekt eingeben",
-    addBtn: "Hinzufügen",
-    importLabel: "📂 Liste importieren (txt oder csv)",
-    ufoTitle: "Meine UFOs:",
-    clearBtn: "🗑 Alles löschen",
-    rollBtn: "🎲 Würfeln!",
-    helpBtn: "❓ Anleitung",
-    helpTitle: "So benutzt du RandomiseMe",
-    helpText:
-      "1. Projekte manuell hinzufügen oder Liste importieren.<br><br>" +
-      "2. Auf 'Würfeln!' klicken, um ein Projekt zufällig auszuwählen.<br><br>" +
-      "3. 'Alles löschen' setzt die Liste zurück.<br><br>" +
-      "Listen können durch Komma, Semikolon, Zeilenumbruch oder Tab getrennt sein.",
-    reloadHint: "Falls die App nicht korrekt aktualisiert:",
-    emptyAlert: "Noch keine Projekte vorhanden!",
-    clearConfirm: "Liste wirklich löschen?",
-    chosen: "Gewählt:"
-  },
-  en: {
-    flavour: "Still drowning in projects?<br>Time to tell them: Alea iacta est!",
-    inputPlaceholder: "Enter project name",
-    addBtn: "Add project",
-    importLabel: "📂 Import list (txt or csv)",
-    ufoTitle: "My UFOs:",
-    clearBtn: "🗑 Clear all UFOs",
-    rollBtn: "🎲 Let's roll!",
-    helpBtn: "❓ HowTo",
-    helpTitle: "How to use RandomiseMe",
-    helpText:
-      "1. Add projects manually or import a list.<br><br>" +
-      "2. Click 'Let's roll!' to randomly select one.<br><br>" +
-      "3. 'Clear all UFOs' resets the list.<br><br>" +
-      "Lists may be separated by commas, semicolons, line breaks or tabs.",
-    reloadHint: "If the Home Screen app does not update:",
-    emptyAlert: "No projects added yet!",
-    clearConfirm: "Really clear the list?",
-    chosen: "Selected:"
+  // i18n init
+  if (window.i18n && typeof window.i18n.init === "function") {
+    window.i18n.init();
   }
-};
+  const t = (window.i18n && window.i18n.t) ? window.i18n.t : (k => k);
 
-let currentLanguage = localStorage.getItem("language") || "en";
-let projects = JSON.parse(localStorage.getItem("projects")) || [];
+  // language selector
+  const langSelect = document.getElementById("langSelect");
+  if (langSelect && window.i18n && typeof window.i18n.setLang === "function") {
+    langSelect.value = window.i18n.getLang();
+    langSelect.addEventListener("change", (e) => {
+      window.i18n.setLang(e.target.value);
+    });
+  }
 
-function saveProjects() {
-  localStorage.setItem("projects", JSON.stringify(projects));
-}
+  // storage
+  let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
-function applyTranslations() {
-  const t = translations[currentLanguage];
-  document.documentElement.lang = currentLanguage;
+  function saveProjects() {
+    localStorage.setItem("projects", JSON.stringify(projects));
+  }
 
-  // Defensive: only set if elements exist
-  const flavourText = document.getElementById("flavourText");
-  if (flavourText) flavourText.innerHTML = t.flavour;
+  function addProject() {
+    const input = document.getElementById("projectInput");
+    const name = input.value.trim();
 
-  const projectInput = document.getElementById("projectInput");
-  if (projectInput) projectInput.placeholder = t.inputPlaceholder;
+    if (name === "") return;
 
-  const addBtn = document.getElementById("addBtn");
-  if (addBtn) addBtn.textContent = t.addBtn;
+    if (!projects.some(p => p.toLowerCase() === name.toLowerCase())) {
+      projects.push(name);
+      saveProjects();
+      renderProjects();
+    }
 
-  const importLabel = document.getElementById("importLabel");
-  if (importLabel) importLabel.textContent = t.importLabel;
+    input.value = "";
+    input.focus();
+  }
 
-  const ufoTitle = document.getElementById("ufoTitle");
-  if (ufoTitle) ufoTitle.textContent = t.ufoTitle;
-
-  const clearBtn = document.getElementById("clearBtn");
-  if (clearBtn) clearBtn.textContent = t.clearBtn;
-
-  const randomBtn = document.getElementById("randomBtn");
-  if (randomBtn) randomBtn.textContent = t.rollBtn;
-
-  const helpBtn = document.getElementById("helpBtn");
-  if (helpBtn) helpBtn.textContent = t.helpBtn;
-
-  const helpTitle = document.getElementById("helpTitle");
-  if (helpTitle) helpTitle.textContent = t.helpTitle;
-
-  const helpText = document.getElementById("helpText");
-  if (helpText) helpText.innerHTML = t.helpText;
-
-  const reloadHint = document.getElementById("reloadHint");
-  if (reloadHint) reloadHint.textContent = t.reloadHint;
-
-  // Active language highlight
-  document.querySelectorAll(".language-switch button").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.lang === currentLanguage);
-  });
-}
-
-function switchLanguage(lang) {
-  if (!translations[lang]) return;
-  currentLanguage = lang;
-  localStorage.setItem("language", lang);
-  applyTranslations();
-}
-
-function renderProjects() {
-  const list = document.getElementById("projectList");
-  if (!list) return;
-
-  list.innerHTML = "";
-
-  projects.forEach((project, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${project}
-      <button onclick="deleteProject(${index})">❌</button>
-    `;
-    list.appendChild(li);
-  });
-}
-
-function addProject() {
-  const input = document.getElementById("projectInput");
-  if (!input) return;
-
-  const name = input.value.trim();
-  if (!name) return;
-
-  if (!projects.some(p => p.toLowerCase() === name.toLowerCase())) {
-    projects.push(name);
+  window.deleteProject = function (index) {
+    projects.splice(index, 1);
     saveProjects();
     renderProjects();
-  }
-
-  input.value = "";
-}
-
-function deleteProject(index) {
-  projects.splice(index, 1);
-  saveProjects();
-  renderProjects();
-}
-
-// ensure inline onclick can find it
-window.deleteProject = deleteProject;
-
-function clearAll() {
-  if (!confirm(translations[currentLanguage].clearConfirm)) return;
-
-  projects = [];
-  localStorage.removeItem("projects");
-  renderProjects();
-
-  const result = document.getElementById("result");
-  if (result) result.innerHTML = "";
-}
-
-function roll() {
-  if (projects.length === 0) {
-    alert(translations[currentLanguage].emptyAlert);
-    return;
-  }
-
-  const resultDiv = document.getElementById("result");
-  const button = document.getElementById("randomBtn");
-  if (!resultDiv || !button) return;
-
-  button.classList.add("rolling");
-
-  const interval = setInterval(() => {
-    const randomIndex = Math.floor(Math.random() * projects.length);
-    resultDiv.textContent = projects[randomIndex];
-  }, 80);
-
-  setTimeout(() => {
-    clearInterval(interval);
-    button.classList.remove("rolling");
-
-    const finalIndex = Math.floor(Math.random() * projects.length);
-
-    resultDiv.innerHTML =
-      translations[currentLanguage].chosen +
-      " <span class='result-highlight'>" +
-      projects[finalIndex] +
-      "</span>";
-  }, 2000);
-}
-
-function setupModal() {
-  const modal = document.getElementById("helpModal");
-  const helpBtn = document.getElementById("helpBtn");
-  const closeBtn = document.querySelector(".close-btn");
-  if (!modal || !helpBtn || !closeBtn) return;
-
-  const open = () => {
-    modal.style.display = "block";
-    modal.setAttribute("aria-hidden", "false");
   };
 
-  const close = () => {
-    modal.style.display = "none";
-    modal.setAttribute("aria-hidden", "true");
+  window.clearAll = function () {
+    const confirmDelete = confirm(t("confirmClearAll"));
+    if (!confirmDelete) return;
+
+    projects = [];
+    localStorage.removeItem("projects");
+    renderProjects();
+    document.getElementById("result").innerHTML = "";
   };
 
-  helpBtn.addEventListener("click", open);
-  closeBtn.addEventListener("click", close);
+  function renderProjects() {
+    const list = document.getElementById("projectList");
+    list.innerHTML = "";
 
-  window.addEventListener("click", (event) => {
-    if (event.target === modal) close();
-  });
+    projects.forEach((project, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        ${escapeHtml(project)}
+        <button onclick="deleteProject(${index})" aria-label="Delete">❌</button>
+      `;
+      list.appendChild(li);
+    });
+  }
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") close();
-  });
-}
+  // randomiser
+  window.roll = function () {
+    if (projects.length === 0) {
+      alert(t("alertNoProjects"));
+      return;
+    }
 
-function setupReloadButton() {
-  const reloadBtn = document.getElementById("reloadBtn");
-  if (!reloadBtn) return;
+    const resultDiv = document.getElementById("result");
+    const button = document.getElementById("randomBtn");
 
-  reloadBtn.addEventListener("click", () => {
-    // best-effort reload (works for Safari / iOS home-screen too)
-    window.location.href = window.location.pathname + "?v=" + Date.now();
-  });
-}
+    button.classList.add("rolling");
 
-function setupImport() {
-  const fileInput = document.getElementById("fileInput");
-  if (!fileInput) return;
+    const interval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * projects.length);
+      resultDiv.textContent = projects[randomIndex];
+    }, 80);
 
-  fileInput.addEventListener("change", (event) => {
-    const file = event.target.files && event.target.files[0];
+    setTimeout(() => {
+      clearInterval(interval);
+      button.classList.remove("rolling");
+
+      const finalIndex = Math.floor(Math.random() * projects.length);
+
+      let exclamations = t("exclamations");
+      if (!Array.isArray(exclamations) || exclamations.length === 0) {
+        exclamations = ["Et voilà:"]; // safe fallback
+      }
+
+      const randomExclamation =
+        exclamations[Math.floor(Math.random() * exclamations.length)];
+
+      // Reset glow animation only
+      resultDiv.classList.remove("winner-glow");
+      void resultDiv.offsetWidth;
+
+      resultDiv.innerHTML =
+        escapeHtml(String(randomExclamation)) +
+        " <span class='result-highlight'>" +
+        escapeHtml(projects[finalIndex]) +
+        "</span>";
+
+      resultDiv.classList.add("winner-glow");
+
+    }, 2000);
+  };
+
+  // export list
+  const exportBtn = document.getElementById("exportBtn");
+  if (exportBtn) {
+    exportBtn.addEventListener("click", () => {
+      if (!projects.length) {
+        alert(t("alertExportEmpty"));
+        return;
+      }
+      const content = projects.join("\n");
+      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "randomiseme-projects.txt";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      // optional feedback
+      // alert(t("alertExportDone"));
+    });
+  }
+
+  // import data
+  document.getElementById("fileInput").addEventListener("change", function (event) {
+    const file = event.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = (e) => {
-      const content = String(e.target.result || "");
-      const entries = content.split(/[\r\n,;\t]+/);
+    reader.onload = function (e) {
 
-      let changed = false;
+      const content = e.target.result;
+      const entries = String(content).split(/[\r\n,;\t]+/);
+
+      let added = 0;
 
       entries.forEach(entry => {
-        let trimmed = entry.trim();
-        // remove surrounding quotes
-        trimmed = trimmed.replace(/^"(.*)"$/, "$1");
+        let trimmed = String(entry).trim();
+        trimmed = trimmed.replace(/^"(.*)"$/, '$1');
 
-        if (!trimmed) return;
-
-        if (!projects.some(p => p.toLowerCase() === trimmed.toLowerCase())) {
+        if (
+          trimmed !== "" &&
+          !projects.some(p => p.toLowerCase() === trimmed.toLowerCase())
+        ) {
           projects.push(trimmed);
-          changed = true;
+          added++;
         }
       });
 
-      if (changed) {
-        saveProjects();
-        renderProjects();
-      }
+      saveProjects();
+      renderProjects();
 
-      // allow importing same file again later
-      fileInput.value = "";
+      alert(t("alertImportFinished", { count: added }));
     };
 
     reader.readAsText(file);
   });
-}
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderProjects();
-  applyTranslations();
+  // activate add on enter
+  document.getElementById("projectForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    addProject();
+  });
 
-  // Form submit (Enter + button)
-  const form = document.getElementById("projectForm");
-  if (form) {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      addProject();
+  // help modal
+  const modal = document.getElementById("helpModal");
+  const helpBtn = document.getElementById("helpBtn");
+  const closeBtn = document.querySelector(".close-btn");
+
+  if (helpBtn && modal && closeBtn) {
+    helpBtn.addEventListener("click", function () {
+      modal.style.display = "block";
+    });
+
+    closeBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        modal.style.display = "none";
+      }
     });
   }
 
-  const clearBtn = document.getElementById("clearBtn");
-  if (clearBtn) clearBtn.addEventListener("click", clearAll);
-
-  const randomBtn = document.getElementById("randomBtn");
-  if (randomBtn) randomBtn.addEventListener("click", roll);
-
-  // Language buttons
-  document.querySelectorAll(".language-switch button").forEach(btn => {
-    btn.addEventListener("click", function() {
-      switchLanguage(this.dataset.lang);
+  // Service Worker (PWA) + reload helper
+  let swReg = null;
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").then((reg) => {
+      swReg = reg;
+    }).catch(() => {
+      // ignore
     });
-  });
+  }
 
-  setupImport();
-  setupModal();
-  setupReloadButton();
+  const reloadBtn = document.getElementById("reloadBtn");
+  if (reloadBtn) {
+    reloadBtn.addEventListener("click", function () {
+      // Prefer SW update flow
+      if (swReg && swReg.waiting) {
+        swReg.waiting.postMessage({ type: "SKIP_WAITING" });
+      }
+
+      // cache-bust reload as fallback
+      const base = window.location.href.split("?")[0].split("#")[0];
+      window.location.href = base + "?v=" + Date.now();
+    });
+  }
+
+  // initial render
+  renderProjects();
+
+  // helpers
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 });
