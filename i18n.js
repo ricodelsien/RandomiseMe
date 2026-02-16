@@ -84,10 +84,10 @@
 
     "heading.done": "Erledigt:",
     "heading.history": "Verlauf:",
-    "btn.clear_done": "🧹 Erledigte löschen",
-    "btn.clear_history": "🗑 Verlauf löschen",
-    "btn.copy_history": "📋 Verlauf kopieren",
-    "btn.mark_done": "✅ Als erledigt markieren",
+    "btn.clear_done": "🧹 Löschen",
+    "btn.clear_history": "🗑 Löschen",
+    "btn.copy_history": "📋 Kopieren",
+    "btn.mark_done": "✅ Erledigt!",
     "btn.copy": "📋 Kopieren",
     "btn.undo": "Rückgängig",
 
