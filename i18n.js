@@ -1,9 +1,9 @@
 (function(){
   const TRANSLATIONS = {
   "en": {
-    "lang.name": "English",
+    "lang.name": "🇬🇧 EN",
     "lang.label": "Language",
-    "flavour.text": "Still drowning in projects?<br>Time to tell them: Alea iacta est!",
+    "flavour.text": "Hi, how are you today? <br> Let’s pick a new project! :)",
     "input.placeholder": "Enter project name",
     "btn.add": "Add project",
     "btn.import": "📂 Import list (txt or csv)",
@@ -74,7 +74,7 @@
   "de": {
     "lang.name": "Deutsch",
     "lang.label": "Sprache",
-    "flavour.text": "Noch am Ertrinken in Projekten?<br>Zeit, ihnen zu sagen: Alea iacta est!",
+    "flavour.text": "Hallo, wie geht’s dir heute? <br> Lass uns ein Projekt finden! :)",
     "input.placeholder": "Projektname eingeben",
     "btn.add": "Projekt hinzufügen",
     "btn.import": "📂 Liste importieren (txt oder csv)",
@@ -145,8 +145,8 @@
   "fr": {
     "lang.name": "Français",
     "lang.label": "Langue",
-    "flavour.text": "Toujours submergé(e) par tes projets ?<br>Il est temps de leur dire : Alea iacta est !",
-    "input.placeholder": "Saisir un nom de projet",
+    "flavour.text": "Salut, comment ça va ? <br> Trouvons un projet ! :)",
+    "input.placeholder": "Nom de projet",
     "btn.add": "Ajouter",
     "btn.import": "📂 Importer une liste (txt ou csv)",
     "heading.list": "Mes encours :",
@@ -216,7 +216,7 @@
   "it": {
     "lang.name": "Italiano",
     "lang.label": "Lingua",
-    "flavour.text": "Ancora sommerso/a dai progetti?<br>È ora di dire: Alea iacta est!",
+    "flavour.text": "Ciao, come va oggi? <br> Troviamo un nuovo progetto! :)",
     "input.placeholder": "Inserisci nome progetto",
     "btn.add": "Aggiungi",
     "btn.import": "📂 Importa lista (txt o csv)",
@@ -287,7 +287,7 @@
   "es": {
     "lang.name": "Español",
     "lang.label": "Idioma",
-    "flavour.text": "¿Sigues ahogándote en proyectos?<br>Hora de decirles: Alea iacta est!",
+    "flavour.text": "Hola! ¿Qué tal estás? <br> ¡Vamos a elegir un proyecto! :)",
     "input.placeholder": "Escribe el nombre del proyecto",
     "btn.add": "Añadir",
     "btn.import": "📂 Importar lista (txt o csv)",
@@ -358,7 +358,7 @@
   "pl": {
     "lang.name": "Polski",
     "lang.label": "Język",
-    "flavour.text": "Nadal toniesz w projektach?<br>Czas im powiedzieć: Alea iacta est!",
+    "flavour.text": "Cześć, jak się masz? <br> Wybierzmy nowy projekt! :)",
     "input.placeholder": "Wpisz nazwę projektu",
     "btn.add": "Dodaj",
     "btn.import": "📂 Importuj listę (txt lub csv)",
@@ -429,7 +429,7 @@
   "pt": {
     "lang.name": "Português",
     "lang.label": "Idioma",
-    "flavour.text": "Ainda a afogar-te em projetos?<br>Hora de dizer: Alea iacta est!",
+    "flavour.text": "Olá, como você está? <br> Vamos escolher um projeto! :)",
     "input.placeholder": "Escreve o nome do projeto",
     "btn.add": "Adicionar",
     "btn.import": "📂 Importar lista (txt ou csv)",
@@ -500,7 +500,7 @@
   "sv": {
     "lang.name": "Svenska",
     "lang.label": "Språk",
-    "flavour.text": "Drunknar du fortfarande i projekt?<br>Dags att säga: Alea iacta est!",
+    "flavour.text": "Hej, hur mår du i dag? <br> Nu väljer vi ett projekt! :)",
     "input.placeholder": "Skriv projektnamn",
     "btn.add": "Lägg till",
     "btn.import": "📂 Importera lista (txt eller csv)",
@@ -571,7 +571,7 @@
   "da": {
     "lang.name": "Dansk",
     "lang.label": "Sprog",
-    "flavour.text": "Drukner du stadig i projekter?<br>Tid til at sige: Alea iacta est!",
+    "flavour.text": "Hej, hvordan har du det i dag? <br> Lad os vælge et projekt! :)",
     "input.placeholder": "Indtast projektnavn",
     "btn.add": "Tilføj",
     "btn.import": "📂 Importér liste (txt eller csv)",
@@ -642,7 +642,7 @@
   "ru": {
     "lang.name": "Русский",
     "lang.label": "Язык",
-    "flavour.text": "Всё ещё тонешь в проектах?<br>Пора сказать: Alea iacta est!",
+    "flavour.text": "Привет, как ты сегодня? <br> Давай выберем проект! :)",
     "input.placeholder": "Введите название проекта",
     "btn.add": "Добавить",
     "btn.import": "📂 Импорт списка (txt или csv)",
@@ -713,7 +713,7 @@
   "cs": {
     "lang.name": "Čeština",
     "lang.label": "Jazyk",
-    "flavour.text": "Pořád se topíš v projektech?<br>Je čas říct: Alea iacta est!",
+    "flavour.text": "Ahoj, jak se máš dnes? <br> Vyberme si projekt! :)",
     "input.placeholder": "Zadej název projektu",
     "btn.add": "Přidat",
     "btn.import": "📂 Importovat seznam (txt nebo csv)",
@@ -784,7 +784,7 @@
   "nb": {
     "lang.name": "Norsk",
     "lang.label": "Språk",
-    "flavour.text": "Drukner du fortsatt i prosjekter?<br>På tide å si: Alea iacta est!",
+    "flavour.text": "Hei, hvordan har du det i dag? <br> La oss velge et prosjekt! :)",
     "input.placeholder": "Skriv prosjektnavn",
     "btn.add": "Legg til",
     "btn.import": "📂 Importer liste (txt eller csv)",
@@ -855,7 +855,7 @@
   "fi": {
     "lang.name": "Suomi",
     "lang.label": "Kieli",
-    "flavour.text": "Hukutko yhä projekteihin?<br>Nyt on aika sanoa: Alea iacta est!",
+    "flavour.text": "Hei, miten voit tänään? <br> Valitaan projekti! :)",
     "input.placeholder": "Syötä projektin nimi",
     "btn.add": "Lisää",
     "btn.import": "📂 Tuo lista (txt tai csv)",
