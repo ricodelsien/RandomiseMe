@@ -75,8 +75,8 @@
     "lang.name": "🇩🇪 DE",
     "lang.label": "Sprache",
     "flavour.text": "Hallo, wie geht’s dir heute? <br> Lass uns ein Projekt finden! :)",
-    "input.placeholder": "Projektname",
-    "btn.add": "hinzufügen",
+    "input.placeholder": "Projekt",
+    "btn.add": "Hinzufügen",
     "btn.import": "📂 Liste importieren (.txt oder .csv)",
     "heading.list": "Meine UFOs:",
     "btn.clear": "🗑 Alle UFOs löschen",
@@ -91,7 +91,7 @@
     "btn.copy": "📋 Kopieren",
     "btn.undo": "Rückgängig",
 
-    "help.btn": "❓ Anleitung",
+    "help.btn": "❓ Hilfe",
     "help.title": "So nutzt du RandomiseMe",
     "help.body": "1. Projekte manuell hinzufügen oder eine .txt-/.csv-Liste importieren.<br><br>2. Auf „Würfeln!“ klicken, um zufällig ein Projekt auszuwählen.<br><br>3. „Alle UFOs löschen“ setzt die Liste zurück.<br><br>Importierte Listen dürfen durch Kommas, Semikolons, Zeilenumbrüche oder Tabs getrennt sein.",
     "help.update_hint": "Falls die Homescreen-App sich nicht richtig aktualisiert:",
@@ -162,7 +162,7 @@
     "btn.copy": "📋 Copier",
     "btn.undo": "Annuler",
 
-    "help.btn": "❓ Mode d’emploi",
+    "help.btn": "❓ Quoi",
     "help.title": "Comment utiliser RandomiseMe",
     "help.body": "1. Ajoute des projets manuellement ou importe une liste .txt ou .csv.<br><br>2. Clique sur « On lance ! » pour choisir un projet au hasard.<br><br>3. Utilise « Tout effacer » pour réinitialiser la liste.<br><br>Les listes importées peuvent être séparées par des virgules, des points-virgules, des retours à la ligne ou des tabulations.",
     "help.update_hint": "Si l’app sur l’écran d’accueil ne se met pas à jour correctement :",
