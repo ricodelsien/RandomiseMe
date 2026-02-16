@@ -19,7 +19,7 @@ html, body {
   width: 90%;
   max-width: 650px;
   height: auto;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 /* ========== FLAVOUR ========== */
@@ -234,6 +234,7 @@ li {
 .app-info p {
   margin: 0;
 }
+
 
 
 
