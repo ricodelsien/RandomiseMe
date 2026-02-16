@@ -47,23 +47,23 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---------- language select (English alphabetical order) ----------
 
   const LANG_META = {
-    cs: { name: "Czech", flag: "🇨🇿" },
-    da: { name: "Danish", flag: "🇩🇰" },
-    de: { name: "German", flag: "🇩🇪" },
-    el: { name: "Greek", flag: "🇬🇷" },
+    cs: { name: "Čeština", flag: "🇨🇿" },
+    da: { name: "Dansk", flag: "🇩🇰" },
+    de: { name: "Deutsch", flag: "🇩🇪" },
+    el: { name: "Ελληνικά", flag: "🇬🇷" },
     en: { name: "English", flag: "🇬🇧" },
-    es: { name: "Spanish", flag: "🇪🇸" },
-    fi: { name: "Finnish", flag: "🇫🇮" },
-    fr: { name: "French", flag: "🇫🇷" },
-    it: { name: "Italian", flag: "🇮🇹" },
-    nb: { name: "Norwegian", flag: "🇳🇴" },
-    nl: { name: "Dutch", flag: "🇳🇱" },
-    pl: { name: "Polish", flag: "🇵🇱" },
-    pt: { name: "Portuguese", flag: "🇵🇹" },
-    ru: { name: "Russian", flag: "🇷🇺" },
-    sv: { name: "Swedish", flag: "🇸🇪" },
-    tr: { name: "Turkish", flag: "🇹🇷" },
-    uk: { name: "Ukrainian", flag: "🇺🇦" }
+    es: { name: "Español", flag: "🇪🇸" },
+    fi: { name: "Suomi", flag: "🇫🇮" },
+    fr: { name: "Français", flag: "🇫🇷" },
+    it: { name: "Italiano", flag: "🇮🇹" },
+    nb: { name: "Bokmål", flag: "🇳🇴" },
+    nl: { name: "Nederlands", flag: "🇳🇱" },
+    pl: { name: "Polski", flag: "🇵🇱" },
+    pt: { name: "Português", flag: "🇵🇹" },
+    ru: { name: "Русский", flag: "🇷🇺" },
+    sv: { name: "Svenska", flag: "🇸🇪" },
+    tr: { name: "Türkçe", flag: "🇹🇷" },
+    uk: { name: "Українська", flag: "🇺🇦" }
   };
 
   function buildLanguageSelectEnglishAlphabetical() {
