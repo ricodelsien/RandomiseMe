@@ -6,9 +6,9 @@
   const I18N = {
     en: {
       appTitle: "RandomiseMe!",
-      flavourHtml: "Still drowning in projects?<br>Time to tell them: Alea iacta est!",
+      flavourHtml: "Still drowning in projects?<br>Then it's time for: Alea iacta est!",
       inputPlaceholder: "Enter project name",
-      btnAdd: "Add project",
+      btnAdd: "Add",
       btnImport: "📂 Import list (txt or csv)",
       btnExport: "💾 Export list",
       headingUfos: "My UFOs:",
@@ -23,7 +23,7 @@
         "Tip: Imported lists can be separated by commas, semicolons, line breaks or tabs."
       ],
       modalUpdateHint: "If the Home Screen app does not update properly:",
-      btnReload: "🔄 Reload app",
+      btnReload: "🔄 Force reload",
       modalPrivacy: "Privacy: your list stays on this device (saved in your browser).",
       confirmClearAll: "Do you really want to clear the list?",
       alertNoProjects: "No projects added yet!",
@@ -33,6 +33,9 @@
       exclamations: [
         "Oh look:",
         "Bäm:",
+        "Kaching:",
+        "Dingdingding:",
+        "Psssht:",
         "Take that:",
         "Well:",
         "Guess what:",
@@ -49,9 +52,9 @@
 
     de: {
       appTitle: "RandomiseMe!",
-      flavourHtml: "Ertrinkst du noch in Projekten?<br>Zeit, ihnen zu sagen: Alea iacta est!",
-      inputPlaceholder: "Projektname eingeben",
-      btnAdd: "Projekt hinzufügen",
+      flavourHtml: "Überfordert mit Deinen Projekten?<br>Lass den Zufall entscheiden: Alea iacta est!",
+      inputPlaceholder: "Projektnamen eingeben",
+      btnAdd: "hinzufügen",
       btnImport: "📂 Liste importieren (txt oder csv)",
       btnExport: "💾 Liste exportieren",
       headingUfos: "Meine UFOs:",
@@ -76,6 +79,9 @@
       exclamations: [
         "Schau mal:",
         "Bäm:",
+        "Sieh an, sieh an:",
+        "Hier, hast Du:",
+        "Frisch aus dem Ofen:",
         "Bitte sehr:",
         "Tja:",
         "Rate mal:",
@@ -83,6 +89,7 @@
         "Na dann:",
         "Los geht’s:",
         "Ta‑da:",
+        "Simsalabim:",
         "Et voilà:"
       ],
       langLabel: "Sprache",
@@ -117,7 +124,7 @@
       alertExportEmpty: "Rien à exporter pour le moment.",
       alertExportDone: "Export créé.",
       exclamations: [
-        "Oh là :",
+        "Oh là là:",
         "Bam :",
         "Tiens :",
         "Alors :",
