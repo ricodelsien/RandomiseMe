@@ -23,6 +23,48 @@ document.addEventListener("DOMContentLoaded", function () {
   // Last picked project name (for result action buttons)
   let lastPicked = null;
 
+    // ---------- language select ordering ----------
+
+  const PREFERRED_LANG_ORDER = [
+    "de","en","fr","it",
+    "es","nl","pl","pt",
+    "sv","da","nb","fi",
+    "cs","el","tr","uk","ru"
+  ];
+
+  function buildLanguageSelectOrdered() {
+    const selectEl = document.getElementById("langSelect"); // <- falls deine ID anders ist: hier anpassen
+    if (!selectEl) return;
+
+    // translations container: either window.I18N or window.i18n.dict (depending on your setup)
+    const dict =
+      (window.I18N && typeof window.I18N === "object" && window.I18N) ||
+      (window.i18n && window.i18n.dict && typeof window.i18n.dict === "object" && window.i18n.dict) ||
+      null;
+
+    if (!dict) return;
+
+    const all = Object.keys(dict).filter(code => dict[code] && dict[code]["lang.name"]);
+
+    const inPreferred = PREFERRED_LANG_ORDER.filter(code => all.includes(code));
+    const rest = all
+      .filter(code => !PREFERRED_LANG_ORDER.includes(code))
+      .sort((a, b) =>
+        String(dict[a]["lang.name"]).localeCompare(String(dict[b]["lang.name"]), undefined, { sensitivity: "base" })
+      );
+
+    const ordered = [...inPreferred, ...rest];
+
+    // rebuild options
+    selectEl.innerHTML = "";
+    for (const code of ordered) {
+      const opt = document.createElement("option");
+      opt.value = code;
+      opt.textContent = dict[code]["lang.name"]; // e.g. 🇩🇪 DE
+      selectEl.appendChild(opt);
+    }
+  }
+
   // ---------- helpers ----------
 
   function loadArray(key) {
@@ -698,6 +740,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // initial render
+  buildLanguageSelectOrdered();
   renderProjects();
   renderDone();
   renderHistory();
