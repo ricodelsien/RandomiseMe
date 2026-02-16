@@ -75,7 +75,7 @@
     "lang.name": "🇩🇪 DE",
     "lang.label": "Sprache",
     "flavour.text": "Hallo, wie geht’s dir heute? <br> Lass uns ein Projekt finden! :)",
-    "input.placeholder": "Projekt",
+    "input.placeholder": "Projekt eingeben",
     "btn.add": "Hinzufügen",
     "btn.import": "📂 Liste importieren (.txt oder .csv)",
     "heading.list": "Meine UFOs:",
