@@ -95,7 +95,7 @@
 
     "help.btn": "❓ Hilfe",
     "help.title": "So nutzt du RandomiseMe",
-    "help.body": "1. Projekte manuell hinzufügen oder eine .txt/.csv-Liste importieren.<br><br>2. Tippe auf 🎲, um zufällig ein Projekt auszuwählen.<br><br>3. 🗑 setzt die aktive Liste zurück (Erledigt & Verlauf bleiben).<br><br>Importierte Listen dürfen durch Kommas, Semikola, Zeilenumbrüche oder Tabs getrennt sein.<br><br>4. Einträge können als erledigt markiert und wiederhergestellt werden.<br><br>5. Verlauf und erledigte Projekte können bei Bedarf geleert werden.<br><br>Hinweis: Deine Liste wird lokal im Browser gespeichert. Wenn du die Website-Daten dieser Seite löschst, ist sie weg.",
+    "help.body": "1. Projekte manuell hinzufügen oder eine .txt/.csv-Liste importieren.<br><br>2. Tippe auf 🎲, um zufällig ein Projekt auszuwählen.<br><br>3. 🗑 setzt die aktive Liste zurück.<br><br>Importierte Listen dürfen durch ein Komma, Semikolon, Zeilenumbruch oder Tab getrennt sein.<br><br>4. Einträge können als erledigt markiert und wiederhergestellt werden.<br><br>5. Verlauf und erledigte Projekte können bei Bedarf geleert werden.<br><br>Hinweis: Deine Liste wird lokal im Browser gespeichert. Wenn du die Website-Daten dieser Seite löschst, ist sie weg.",
     "help.update_hint": "Falls die Homescreen-App sich nicht richtig aktualisiert:",
     "help.reload": "🔄 App neu laden",
 
