@@ -93,7 +93,7 @@
 
     "help.btn": "❓ Hilfe",
     "help.title": "So nutzt du RandomiseMe",
-    "help.body": "1. Projekte manuell hinzufügen oder eine .txt-/.csv-Liste importieren.<br><br>2. Auf „Würfeln!“ klicken, um zufällig ein Projekt auszuwählen.<br><br>3. „Alle UFOs löschen“ setzt die Liste zurück.<br><br>Importierte Listen dürfen durch Kommas, Semikolons, Zeilenumbrüche oder Tabs getrennt sein.",
+    "help.body": "1. Projekte manuell hinzufügen oder eine .txt-/.csv-Liste importieren.<br><br>2. Auf „Würfeln!“ klicken, um zufällig ein Projekt auszuwählen.<br><br>3. „Alle UFOs löschen“ setzt die Liste zurück.<br><br>Importierte Listen dürfen durch Kommata, Semikola, Zeilenumbrüche oder Tabs getrennt sein.<br><br>4. Einträge können als erledigt markiert und / oder wiederhergestellt werden. <br><br>5. Verlauf und abgeschlossene Projekte können gelöscht werden.<br><br>Die Liste muss erneut angelegt werden, sobald der Browser-Cache geleert wird.",
     "help.update_hint": "Falls die Homescreen-App sich nicht richtig aktualisiert:",
     "help.reload": "🔄 App neu laden",
 
