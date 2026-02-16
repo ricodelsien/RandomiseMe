@@ -1,11 +1,11 @@
-/* Simple offline cache for RandomiseMe */
-const CACHE_NAME = 'randomiseme-v0.3-i18n';
+/* RandomiseMe! Service Worker */
+const CACHE_VERSION = 'randomiseme-v0.6a-2026-02-16';
 const ASSETS = [
   './',
   './index.html',
   './style.css',
-  './i18n.js',
   './script.js',
+  './i18n.js',
   './manifest.json',
   './icon.png',
   './icon-192.png',
@@ -15,38 +15,44 @@ const ASSETS = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+    caches.open(CACHE_VERSION).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(
-      keys.map(k => (k !== CACHE_NAME) ? caches.delete(k) : Promise.resolve())
-    ))
+    caches.keys().then((keys) =>
+      Promise.all(keys.map((k) => (k !== CACHE_VERSION ? caches.delete(k) : Promise.resolve())))
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
-});
-
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
 });
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
-  if (req.method !== 'GET') return;
 
+  // Network-first for navigation so updates come through
+  if (req.mode === 'navigate') {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE_VERSION).then((cache) => cache.put('./index.html', copy));
+          return res;
+        })
+        .catch(() => caches.match('./index.html'))
+    );
+    return;
+  }
+
+  // Cache-first for everything else
   event.respondWith(
-    caches.match(req).then(cached => {
-      if (cached) return cached;
-      return fetch(req).then(resp => {
-        const copy = resp.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
-        return resp;
-      }).catch(() => caches.match('./index.html'));
-    })
+    caches.match(req).then((cached) =>
+      cached ||
+      fetch(req).then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
+        return res;
+      })
+    )
   );
 });

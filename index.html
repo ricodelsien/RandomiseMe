@@ -1,67 +1,131 @@
 <!-- Project: RandomiseMe! -->
 <!-- Cause: shuffle-pick large numbers of projects -->
 <!-- Author: Nico Siedler (git: ricodelsien) -->
-<!-- Date: 2026-02-13 -->
-<!-- Version: 0.2a -->
+<!-- Date: 2026-02-16 -->
+<!-- Version: 0.6a -->
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-<title>RandomiseMe!</title>
-<!-- iOS Homescreen icon -->
-<link href="icon.png" rel="apple-touch-icon" sizes="180x180"/>
-<link href="icon.png" rel="icon" sizes="512x512" type="image/png"/>
-<!-- iOS Web App Mode -->
-<meta content="yes" name="apple-mobile-web-app-capable"/>
-<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<meta content="RandomiseMe" name="apple-mobile-web-app-title"/>
-<link href="style.css" rel="stylesheet"/>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+
+  <title>RandomiseMe!</title>
+
+  <!-- iOS / Android icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="icon.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="icon.png"/>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#000000"/>
+
+  <!-- iOS Web App Mode -->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="RandomiseMe"/>
+
+  <link rel="stylesheet" href="style.css"/>
 </head>
+
 <body>
-<div class="header">
-<img alt="Randomise Me" src="Randomise.png"/>
-</div>
-<div class="flavour-text">
-<p data-i18n-html="flavour.text">Still drowning in projects?<br/>Time to tell them: Alea iacta est!</p>
-</div>
-<div class="input-section">
-<form id="projectForm">
-<input autocomplete="off" data-i18n-placeholder="input.placeholder" id="projectInput" placeholder="Enter project name" type="text"/>
-<button data-i18n="btn.add" type="submit">Add project</button>
-</form>
-</div>
-<!-- Import Button -->
-<div class="import-section">
-<label class="custom-file-button" data-i18n="btn.import" for="fileInput">📂 Import list (txt or csv)</label>
-<input accept=".txt,.csv" hidden="" id="fileInput" type="file"/>
-</div>
-<h3>__________</h3>
-<h4 data-i18n="heading.list">My UFOs:</h4>
-<ul id="projectList"></ul>
-<!-- clear and shuffle buttons -->
-<div class="button-group">
-<button data-i18n="btn.clear" id="clearBtn" onclick="clearAll()">🗑 Clear all UFOs</button>
-<button data-i18n="btn.roll" id="randomBtn" onclick="roll()">🎲 Let's roll!</button>
-</div>
-<div id="result"></div>
-<!-- Help Button -->
-<button class="help-button" data-i18n="help.btn" id="helpBtn">❓ HowTo</button>
-<!-- Help Modal -->
-<div class="modal" id="helpModal">
-<div class="modal-content">
-<span class="close-btn">×</span>
-<h3 data-i18n="help.title">How to use RandomiseMe</h3>
-<p data-i18n-html="help.body">1. Add projects manually or import a .txt or .csv list.<br/><br/>2. Click "Let's roll!" to randomly select a single project.<br/><br/>3. Use "Clear all UFOs" to reset your list.<br/><br/>Imported lists can be separated by commas, semicolons, line breaks or tabs.</p>
-<hr style="margin:20px 0; opacity:0.3;"/>
-<p class="help-hint" data-i18n="help.update_hint">If the Home Screen app does not update properly:</p>
-<button class="reload-button" data-i18n="help.reload" id="reloadBtn">🔄 Reload app</button>
-</div>
-</div>
-<footer class="app-info"><div class="lang-select"><label data-i18n="lang.label" for="langSelect">Language</label><select data-i18n-aria="lang.label" id="langSelect"><option value="en">English</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="es">Español</option><option value="pl">Polski</option><option value="pt">Português</option><option value="sv">Svenska</option><option value="da">Dansk</option><option value="ru">Русский</option><option value="cs">Čeština</option><option value="nb">Norsk</option><option value="fi">Suomi</option></select></div>
-<p><span data-i18n="footer.created">RandomiseMe! – created by Nico Siedler</span><br/><span data-i18n="footer.license">Version 0.2a 02/2026 published under GPL3</span> <span id="buildDate"></span></p>
-</footer>
-<script src="i18n.js"></script><script src="script.js"></script>
+  <main class="app" role="application" aria-label="RandomiseMe">
+    <header class="header">
+      <img src="Randomise.png" alt="RandomiseMe"/>
+      <p class="flavour-text" data-i18n-html="flavour.text">Hi, how are you today? <br/> Let’s pick a new project! :)</p>
+    </header>
+
+    <section class="controls" aria-label="Controls">
+      <form id="projectForm" class="project-form" autocomplete="off">
+        <input
+          id="projectInput"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          data-i18n-placeholder="input.placeholder"
+          placeholder="Enter project name"
+          aria-label="Project name"
+        />
+        <button type="submit" data-i18n="btn.add">Add project</button>
+      </form>
+
+      <div class="import-section">
+        <label class="custom-file-button" for="fileInput" data-i18n="btn.import">📂 Import list (txt or csv)</label>
+        <input id="fileInput" type="file" accept=".txt,.csv" hidden/>
+      </div>
+
+      <div class="button-group">
+        <button id="clearBtn" data-i18n="btn.clear">🗑 Clear all UFOs</button>
+        <button id="randomBtn" data-i18n="btn.roll">🎲 Let's roll!</button>
+      </div>
+
+      <div id="result" aria-live="polite"></div>
+
+      <div id="resultActions" class="result-actions" hidden>
+        <button id="markPickedDoneBtn" data-i18n="btn.mark_done">✅ Mark as done</button>
+        <button id="copyPickedBtn" data-i18n="btn.copy">📋 Copy</button>
+      </div>
+    </section>
+
+    <section class="scroll-area" aria-label="Lists">
+      <h4 class="list-title" data-i18n="heading.list">My UFOs:</h4>
+      <ul id="projectList"></ul>
+
+      <div class="panels">
+        <details id="donePanel" class="panel">
+          <summary><span data-i18n="heading.done">Done:</span> <span class="panel-count" id="doneCount">0</span></summary>
+          <div class="panel-actions">
+            <button id="clearDoneBtn" data-i18n="btn.clear_done">🧹 Clear done</button>
+          </div>
+          <ul id="doneList"></ul>
+        </details>
+
+        <details id="historyPanel" class="panel">
+          <summary><span data-i18n="heading.history">History:</span> <span class="panel-count" id="historyCount">0</span></summary>
+          <div class="panel-actions">
+            <button id="copyHistoryBtn" data-i18n="btn.copy_history">📋 Copy history</button>
+            <button id="clearHistoryBtn" data-i18n="btn.clear_history">🗑 Clear history</button>
+          </div>
+          <ul id="historyList"></ul>
+        </details>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-row">
+        <div class="lang-select">
+          <label for="langSelect" data-i18n="lang.label">Language</label>
+          <select id="langSelect" data-i18n-aria="lang.label" aria-label="Language"></select>
+        </div>
+
+        <button id="helpBtn" class="help-button" data-i18n="help.btn">❓ HowTo</button>
+      </div>
+
+      <p class="footer-text">
+        <span data-i18n="footer.created">RandomiseMe! – created by Nico Siedler</span><br/>
+        <span data-i18n="footer.license">Version 0.6a 02/2026 published under GPL3</span>
+        <span id="buildDate"></span>
+      </p>
+    </footer>
+  </main>
+
+  <!-- Help Modal -->
+  <div id="helpModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-label="Help">
+      <button class="close-btn" aria-label="Close">×</button>
+      <h3 data-i18n="help.title">How to use RandomiseMe</h3>
+      <p data-i18n-html="help.body">1. Add projects manually or import a .txt or .csv list.<br/><br/>2. Click "Let's roll!" to randomly select a single project.<br/><br/>3. Use "Clear all UFOs" to reset your list.<br/><br/>Imported lists can be separated by commas, semicolons, line breaks or tabs.</p>
+
+      <hr class="modal-sep"/>
+
+      <p class="help-hint" data-i18n="help.update_hint">If the Home Screen app does not update properly:</p>
+      <button id="reloadBtn" class="reload-button" data-i18n="help.reload">🔄 Reload app</button>
+    </div>
+  </div>
+
+  <!-- Toast / Undo -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
