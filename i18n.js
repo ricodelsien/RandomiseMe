@@ -5,7 +5,7 @@
     "lang.label": "Language",
     "flavour.text": "Hi, how are you today? <br> Let’s pick a new project! :)",
     "input.placeholder": "Enter project name",
-    "btn.add": "Add project",
+    "btn.add": "Add",
     "btn.import": "📂 Import list (txt or csv)",
     "heading.list": "My UFOs:",
     "btn.clear": "🗑 Clear all UFOs",
