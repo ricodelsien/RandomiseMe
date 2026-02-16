@@ -1,5 +1,5 @@
 /* RandomiseMe! Service Worker */
-const CACHE_VERSION = 'randomiseme-v0.3a-2026-02-16';
+const CACHE_VERSION = 'randomiseme-v0.5a-2026-02-16';
 const ASSETS = [
   './',
   './index.html',
