@@ -3,7 +3,7 @@
   "en": {
     "lang.name": "English",
     "lang.label": "Language",
-    "flavour.text": "Still drowning in projects?<br>Time to tell them: Alea iacta est!",
+    "flavour.text": "Hey, how's it going?<br>Let's pick a new project today :)",
     "input.placeholder": "Enter project name",
     "btn.add": "Add project",
     "btn.import": "📂 Import list (txt or csv)",
@@ -36,7 +36,7 @@
   "de": {
     "lang.name": "Deutsch",
     "lang.label": "Sprache",
-    "flavour.text": "Noch am Ertrinken in Projekten?<br>Zeit, ihnen zu sagen: Alea iacta est!",
+    "flavour.text": "Hallo, wie geht's Dir?<br>Höchste Zeit für ein neues Projekt! :)",
     "input.placeholder": "Projektname eingeben",
     "btn.add": "Projekt hinzufügen",
     "btn.import": "📂 Liste importieren (txt oder csv)",
@@ -69,7 +69,7 @@
   "fr": {
     "lang.name": "Français",
     "lang.label": "Langue",
-    "flavour.text": "Toujours submergé(e) par tes projets ?<br>Il est temps de leur dire : Alea iacta est !",
+    "flavour.text": "Hey, ça va?<br>Trouvons ton projet! :)",
     "input.placeholder": "Saisir un nom de projet",
     "btn.add": "Ajouter",
     "btn.import": "📂 Importer une liste (txt ou csv)",
