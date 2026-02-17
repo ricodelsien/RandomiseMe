@@ -96,22 +96,22 @@
     "help.btn": "❓ Hilfe",
     "help.title": "So nutzt du RandomiseMe",
     "help.body": "1. Projekte manuell hinzufügen oder eine .txt/.csv-Liste importieren.<br><br>2. Tippe auf 🎲, um zufällig ein Projekt auszuwählen.<br><br>3. 🗑 löscht die aktive Liste.<br><br>Importierte Listen dürfen durch ein Komma, Semikolon, Zeilenumbruch oder Tab getrennt sein.<br><br>4. Einträge können als erledigt markiert und wiederhergestellt werden.<br><br>5. Verlauf und erledigte Projekte können auch gelöscht werden.<br><br>Hinweis: Deine Liste wird lokal gespeichert. Wenn du die Website-Daten deines Browsers löschst, gehen alte Listen verloren.",
-    "help.update_hint": "Falls die Homescreen-App sich nicht richtig aktualisiert:",
+    "help.update_hint": "Neustart erzwingen:",
     "help.reload": "🔄 App neu laden",
 
-    "iconpicker.note": "Nach dem Ändern bitte neu zum Homescreen hinzufügen / neu installieren.",
-    "iconpicker.title": "App-Icon-Farbe (für Installation)",
+    "iconpicker.note": "Nach dem Ändern im Browser erneut zum Homescreen hinzufügen.",
+    "iconpicker.title": "App-Icon-Farbe (anstehend)",
     "footer.created": "RandomiseMe! – erstellt von Nico Siedler",
     "footer.license": "Version 0.7a 02/2026 veröffentlicht unter GPL3",
 
-    "confirm.clear": "Alle aktiven Projekte löschen? (Erledigt & Verlauf bleiben.)",
-    "confirm.clear_done": "Erledigt-Liste wirklich leeren?",
+    "confirm.clear": "Alle aktiven Projekte löschen?",
+    "confirm.clear_done": "Liste wirklich leeren?",
     "confirm.clear_history": "Verlauf wirklich löschen?",
 
     "alert.no_projects": "Noch keine Projekte hinzugefügt!",
     "alert.import_finished": "Import fertig: {count} neue Projekte hinzugefügt.",
     "alert.import_restored": "(+{count} wiederhergestellt)",
-    "alert.nothing_to_copy": "Noch nichts zum Kopieren.",
+    "alert.nothing_to_copy": "Nichts zum Kopieren.",
 
     "toast.copied": "In die Zwischenablage kopiert.",
     "toast.deleted": "Gelöscht: {name}",
